@@ -1347,3 +1347,64 @@ if (groceries.includes(randomItem, 1)) {
   console.log(`Yeah! it's on the list`);
 }
 ```
+
+## Part 4: javaScript Modules, Async, Ajax:
+
+when we are talking about a module, we are talking about separate file in folder that contains an ability that has been written in javaScript and we can use it in any of our projects.
+in code that we are doing our self we write `import {random, people} from "./utils/data.js"` the rest is in below codes:
+
+in app.js:
+
+```JavaScript
+import { random, people } from './utils/data.js';
+import showPeople from './utils/showPeople.js';
+// because of default name doesn't mater here.
+import get from './utils/getElement.js';
+
+const container = get('.container');
+const btn = get('.btn');
+
+btn.addEventListener('click', () => {
+  container.innerHTML = showPeople(people);
+});
+```
+
+in data.js:
+
+```JavaScript
+export const random = 'random value';
+export const people = [
+  { name: 'john', job: 'developer' },
+  { name: 'susan', job: 'designer' },
+  { name: 'anna', job: 'the boss' },
+];
+```
+
+in showPeople.js:
+
+```JavaScript
+export default (people) => {
+  // because we have written default every time we import this file we mean this function.
+  const newPeople = people
+    .map((person) => {
+      const { name, job } = person;
+      return `<p>${name} <strong>${job}</strong></p>`;
+    })
+    .join('');
+  return newPeople;
+};
+```
+
+in getElement.js
+
+```JavaScript
+export default function (selection) {
+  const element = document.querySelector(selection);
+  if (element) {
+    return element;
+  } else {
+    throw Error('you did not select element');
+  }
+}
+```
+---
