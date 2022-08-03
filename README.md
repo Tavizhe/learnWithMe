@@ -1,5 +1,7 @@
 # learnWithMe
 
+## Playing around GitHub
+
 alright so in order to commit anything in git we do these steps:
 
 1. install `https://github.com/cli/cli/releases` cli for github.
@@ -10,3 +12,12 @@ alright so in order to commit anything in git we do these steps:
 6. add commit massage about what you did or to ignore it add #.
 7. press tick.
 8. and last press button to Sync changes to git.
+
+---
+
+## Select files to see my course notes
+
+there is file named as Markdown.md to learn about Markdown language..
+there is file named as javaScriptLearningByJohnSmilga.md to learn about JavaScript language..
+
+thx for checking my repository :)
