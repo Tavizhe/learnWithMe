@@ -111,6 +111,56 @@ const letters = [...udemy];
 console.log(letters);
 ```
 
+> we can use `Array.of` to create a new Array instance from a variable number of arguments. example `const friends = Array.of('john', 2, true);` > `Array.from` - returns Array Object from any object with a length property or an iterable object. (can turn array like functions or objects to array)
+
+```JavaScript
+function countTotal() {
+  // console.log(arguments);
+  let total = Array.from(arguments).reduce(
+    (total, currNum) => (total += currNum),
+    0
+  );
+  console.log(total);
+}
+countTotal(67, 89, 54, 100);
+// Array.from in nodeList
+const p = document.querySelectorAll('p');
+const result = document.getElementById('result');
+const second = document.getElementById('second');
+
+let newText = Array.from(p);
+newText = newText.map(item => `<span>${item.textContent}</span>`).join(' ');
+result.innerHTML = newText;
+// or in professionally way
+const text = Array.from(document.querySelectorAll('p'), item => {
+  return `<span>${item.textContent}</span>`;
+}).join(' ');
+second.innerHTML = text;
+```
+
+> `Array.find` gets specific item in our array.
+> `Array.findIndex` get's index of the item.
+> `Array.every` every item in other array match our array.
+> `Array.some` at least one item matches our array.
+
+```JavaScript
+const people=[
+  {id:1, name:"john"},
+  {id:2, name:"peter"},
+  {id:3, name:"anna"},
+  ];
+const grades = ["A","B", "A" , "B"< "C"];
+const goodGrades = ["A","B","A","B"];
+//Array.find
+const anna = people.find(person => person.name === "anna");
+//Array.findIndex
+const person = people.findIndex(item => item.id === 3);
+//Array.every
+const allGoodGrades = grades.every(grade => grade !== "C");
+// Array.some
+const oneBadGrades = grades.some(grade => grade === "C");
+```
+
 ---
 
 ### Functions:
@@ -293,6 +343,35 @@ console.log(person.name);
 console.log(person.greetings); //usage of dot notations.
 delete person.siblings;// delete property
 console.log(person['random-value']); //usage of bracket notation.
+```
+
+### Rest Operator:
+
+gathers/collects the items
+
+```JavaScript
+//arrays
+const fruit = ['apple', 'orange', 'lemon', 'banana', 'pear'];
+const [first, second, ...fruits] = fruit;
+// ...fruits gives us the rest of items
+//objects
+const person = { name: 'john', lastName: 'smith', job: 'developer' };
+const { job, ...rest } = person;
+//functions
+const testScores = [78, 90, 56, 43, 99, 65];
+
+const getAverage = (name, ...scores) => {
+  console.log(name);
+  console.log(scores);
+  let total = 0;
+  for (const score of scores) {
+    total += score;
+  }
+  console.log(`${name}'s average score is ${total / scores.length}`);
+};
+
+getAverage(person.name, 78, 90, 56, 43);
+getAverage(person.name, ...testScores);
 ```
 
 ### Objects Part 2:
@@ -1136,4 +1215,135 @@ result.innerHTML = quote;
 
 ==By passed 09 - OOP Projects part for now==
 
-## Part 3: javaScript OOP Projects
+## Part 3: javaScript rest of ES6 Stuff
+
+we have already mixed some es6 in other parts(as part 2 or quotation).
+
+### for in
+
+`for in` loop - iterate over object properties
+
+```JavaScript
+const person = {
+  name: 'john',
+  age: 25,
+  status: 'student',
+};
+for (const propertyName in person) {
+  console.log(`${propertyName} : ${person[propertyName]}`);
+}
+```
+
+---
+
+### Objects into Arrays
+
+Three methods to convert objects into arrays
+
+- `Object.keys()` - converts property names into array
+- `Object.values()` - converts property values into array
+- `Object.entries()` - converts both
+
+```JavaScript
+const person = {
+  name: 'john',
+  age: 25,
+  status: 'student',
+};
+//Object.keys()
+const keys = Object.keys(person);
+// same goes for Object.values()
+// Object.entries()
+const result = Object.entries(person);
+
+// map method
+const newResult = result.map((item) => {
+  const [first, second] = item;
+  // console.log(first, second);
+  return first;
+});
+
+// for of
+for (const [first, second] of result) {
+  // const  [first, second]= item;
+  console.log(first, second);
+}
+```
+
+### Set Object:
+
+Set object - stores a collection of unique values of any type
+
+has these methods inside of Set:
+
+- `new Set()` - makes empty array (accepts iterable objects)
+- `add(value)` - add properties in array
+- `delete(value)` - removes properties
+- `clear()` - clears all properties
+- `has(value)` - checks if our object has the value
+
+```JavaScript
+const unique = new Set();
+const random = 'third';
+unique.add('first');
+unique.add('second');
+unique.add(random);
+const result = unique.delete('third'); // has all unique properties except third
+const isValue = unique.has("first"); // returns true or false
+unique.clear();
+
+//new Set() example 2:
+const products = [
+  {
+    title: 'high-back bench',
+    company: 'ikea',
+  },
+  {
+    title: 'albany table',
+    company: 'marcos',
+  },
+  {
+    title: 'accent chair',
+    company: 'microsoft',
+  },
+  {
+    title: 'wooden table',
+    company: 'ikea',
+  },
+];
+const companies = products.map((item) => item.company); // stores all company names
+const uniqueCompanies = new Set(companies); // stores all unique names of the already map companies
+const finalCompanies = ['apple', ...uniqueCompanies]; // added apple to array with uniqueCompanies that has converted with rest operation to array
+// all of 3 commands of top in 1 line
+const result = ['all', ...new Set(products.map((item) => item.company))];
+```
+
+---
+
+### String Include Method:
+
+- String includes() - checks if a string contains another string.
+
+```JavaScript
+const products = [
+  { title: 'Modern Poster' },
+  { title: 'Bar Stool' },
+  { title: 'Armchair' },
+  { title: 'Leather Chair' },
+];
+const text = 'a';
+
+const filteredProducts = products.filter((product) =>
+  product.title.toLowerCase().includes(text)
+);
+```
+
+- Array includes() - checks if the item is an array
+
+```JavaScript
+const groceries = ['milk', 'bread', 'meat'];
+let randomItem = 'milk';
+if (groceries.includes(randomItem, 1)) {
+  console.log(`Yeah! it's on the list`);
+}
+```
