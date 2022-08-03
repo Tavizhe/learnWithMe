@@ -5,6 +5,5 @@ alright so in order to commit anything in git we do these steps:
 3. make the change you want to do in your files.
 4. go to Source control and click on changed file.
 5. then click on + to stage the changes.
-6. 
-doing a commit ..
-doing second commit with tick
+6. add commit massage about what you did or to ignore it add #.
+7. 
