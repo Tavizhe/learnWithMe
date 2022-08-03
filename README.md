@@ -17,7 +17,8 @@ alright so in order to commit anything in git we do these steps:
 
 ## Select files to see my course notes
 
-there is file named as Markdown.md to learn about Markdown language..
-there is file named as javaScriptLearningByJohnSmilga.md to learn about JavaScript language..
+there is file named as Markdown.md to learn about Markdown language.
+
+there is file named as javaScriptLearningByJohnSmilga.md to learn about JavaScript language.
 
 thx for checking my repository :)
