@@ -1,4 +1,4 @@
-## #Markdown Learning
+#Markdown Learning
 
 To make a phrase italic in Markdown, you can surround words with an underscore (_ ). For example, \_this_ word would become italic.
 

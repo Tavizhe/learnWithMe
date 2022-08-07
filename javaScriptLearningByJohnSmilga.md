@@ -1407,4 +1407,163 @@ export default function (selection) {
   }
 }
 ```
+
 ---
+
+### Synchronize:
+
+JavaScript always reads 1 line at the time. General concept means that we can manipulate time for running a code after a period of time. it make sense to first boil water and at same time we cut onion, so we use `Fetch Data, Get GeoLocation, setTimeout and setTimer` and this tactic called asynchronous. here is simple example: (it's like doing thing in background)
+
+```JavaScript
+boilWater(10000);
+console.log(`chop carrot`);
+
+function boilWater(time) {
+  console.log('boiling...');
+  setTimeout(() => {
+    console.log('done.');
+  }, time);
+}
+```
+
+this is going to make callback hell and it's not recommended.
+
+#### Promises:
+
+is the way to remove callback hell. it has 3 ways:
+
+- Pending, Resolved, Rejected - After this : then, catch - pass another callback.
+
+```JavaScript
+const heading1 = document.querySelector('.one');
+const heading2 = document.querySelector('.two');
+const heading3 = document.querySelector('.three');
+const btn = document.querySelector('.btn');
+btn.addEventListener('click', () => {});
+
+const promise = new Promise((resolve, reject) => {
+  // this is how to write the code.
+  let value = false;
+  if (value) {
+    resolve([1, 2, 4]);
+  } else {
+    reject(`there was a error, value is false`);
+  }
+});
+promise
+  .then((taco) => {
+    // this is how to invoke it.
+    console.log(taco);
+  })
+  .catch((err) => {
+    //we need this too.
+    console.log(err);
+  });
+```
+
+Example for Reject:
+
+```JavaScript
+const heading1 = document.querySelector('.one');
+const heading2 = document.querySelector('.two');
+const heading3 = document.querySelector('.three');
+const btn = document.querySelector('.btn');
+const container = document.querySelector('.img-container');
+const url = 'https://source.unsplash.com/random';
+btn.addEventListener('click', () => {
+  loadImage(url)
+    .then((taco) => container.appendChild(taco))
+    .catch((err) => console.log(err));
+});
+
+function loadImage(url) {
+  return new Promise((resolve, reject) => {
+    let img = new Image();
+    // making a new image value to load
+    img.addEventListener('load', () => {
+      resolve(img);
+    });
+    img.addEventListener('error', () => {
+      reject(new Error(`Failed to load image from the source : ${url}`));
+    });
+    img.src = url;
+  });
+}
+```
+
+Another example but with DOM:
+
+```JavaScript
+const heading1 = document.querySelector('.one');
+const heading2 = document.querySelector('.four');
+const heading3 = document.querySelector('.three');
+const btn = document.querySelector('.btn');
+btn.addEventListener('click', () => {
+  addColor(1000, heading1, 'red')
+    .then(() => addColor(2000, heading2, 'green')) // can be chained afterward
+    .then(() => addColor(1000, heading3, 'blue'))
+    .catch((err) => console.log(err));
+});
+
+function addColor(time, element, color) {
+  return new Promise((resolve, reject) => {
+    if (element) {
+      setTimeout(() => {
+        element.style.color = color;
+        resolve(); // we can always resolve without doing anything
+      }, time); // in whatever time like 2 seconds
+    } else {
+      reject(new Error(`There is no such element ${element}`));
+    }
+  });
+}
+```
+
+#### An Even Better Way: AsyncAwait
+
+Await always wait to resolve happen.
+How to code it?
+
+```JavaScript
+async function someFunction (){
+  await
+}
+const otherFunction = async() =>{
+  await
+}
+```
+
+Promise example to async:
+
+```JavaScript
+btn.addEventListener('click', async () => {
+  const result = await displayColor();
+  console.log(result);
+});
+
+async function displayColor() {
+  try {
+    const first = await addColor(1000, heading1, 'red');
+    await addColor(1000, heading2, 'green');
+    await addColor(1000, heading3, 'blue');
+    console.log(first);
+  } catch (error) {
+    console.log(error);
+  }
+  return 'hello'; //async always have a return and we can, not use it.
+}
+
+function addColor(time, element, color) {
+  return new Promise((resolve, reject) => {
+    if (element) {
+      setTimeout(() => {
+        element.style.color = color;
+        resolve();
+      }, time);
+    } else {
+      reject(new Error(`There is no such element ${element}`));
+    }
+  });
+}
+```
+
