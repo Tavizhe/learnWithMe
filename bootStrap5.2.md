@@ -2038,3 +2038,1036 @@ to make a button active simply add `.active` to it.
   <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
 </div>
 ```
+
+will be:
+![](/bootStrap5.2/images/65.PNG)
+
+### Cards
+
+```html
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/66.PNG)
+
+#### Content types
+
+##### Body
+
+Cards support a wide variety of content, including images, text, list groups, links, and more. Below are examples of what’s supported.
+
+```html
+<div class="card">
+  <div class="card-body">This is some text within a card body.</div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/67.PNG)
+
+##### Images
+
+```html
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="..." />
+  <div class="card-body">
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/68.PNG)
+
+##### List groups
+
+```html
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+  </ul>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/69.PNG)
+
+u can add cart header and footer with `.card-header` and `.card-footer`
+
+##### Quote
+
+```html
+<div class="card">
+  <div class="card-header">Quote</div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>A well-known quote, contained in a blockquote element.</p>
+      <footer class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+      </footer>
+    </blockquote>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/70.PNG)
+
+##### Navigation
+
+```html
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">
+      With supporting text below as a natural lead-in to additional content.
+    </p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/71.PNG)
+
+#### Images
+
+##### Image caps
+
+```html
+<div class="card mb-3">
+  <img src="..." class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">
+      This is a wider card with supporting text below as a natural lead-in to
+      additional content. This content is a little bit longer.
+    </p>
+    <p class="card-text">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </p>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">
+      This is a wider card with supporting text below as a natural lead-in to
+      additional content. This content is a little bit longer.
+    </p>
+    <p class="card-text">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </p>
+  </div>
+  <img src="..." class="card-img-bottom" alt="..." />
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/72.PNG)
+
+##### Image overlays
+
+```html
+<div class="card text-bg-dark">
+  <img src="..." class="card-img" alt="..." />
+  <div class="card-img-overlay">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">
+      This is a wider card with supporting text below as a natural lead-in to
+      additional content. This content is a little bit longer.
+    </p>
+    <p class="card-text">Last updated 3 mins ago</p>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/73.PNG)
+
+##### Horizontal
+
+remove the grid gutters with .g-0 and use .col-md-\* classes to make the card horizontal at the md breakpoint.
+
+```html
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a wider card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/74.PNG)
+
+we can also use Background and color with `.text-bg-{color} helpers` and add border color with ` border-color` and .text-{color} plus `.bg-transparent`.
+
+#### Card groups
+
+```html
+<div class="card-group">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to
+        additional content. This content is a little bit longer.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">
+        This card has supporting text below as a natural lead-in to additional
+        content.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">
+        This is a wider card with supporting text below as a natural lead-in to
+        additional content. This card has even longer content than the first to
+        show that equal height action.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/75.PNG)
+
+#### Grid cards
+
+here’s .row-cols-1 laying out the cards on one column, and .row-cols-md-2 splitting four cards to equal width across multiple rows, from the medium breakpoint up.
+
+```html
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/76.PNG)
+
+When you need equal height, add `.h-100` to the cards. If you want equal heights by default, you can set `$card-height: 100%` in Sass.
+
+### Carousel
+
+The `.active` class needs to be added to one of the slides otherwise the carousel will not be visible.Note the presence of the `.d-block` and `.w-100` on carousel images to prevent browser default image alignment. Adding in the previous and next controls. We recommend using `<button>` elements, but you can also use `<a>` elements with `role="button"`.With indicators `<div class="carousel-indicators">`. Add captions to your slides easily with the `.carousel-caption` element within any `.carousel-item`. Add `.carousel-fade` to your carousel to animate slides with a fade transition instead of a slide. Add `data-bs-interval=""` to a `.carousel-item` to change the amount of time to delay between automatically cycling to the next item. Carousels support swiping left/right on touchscreen devices to move between slides. This can be disabled using the `data-bs-touch` attribute. Add `.carousel-dark` to the `.carousel` for darker controls, indicators, and captions.
+
+### Close button
+
+Provide an option to dismiss or close a component with `.btn-close`. or mke it disabled with `<button type="button" class="btn-close" disabled aria-label="Close"></button>`. Change the default `.btn-close` to be white with the `.btn-close-white` class.
+
+### Collapse
+
+Click the buttons below to show and hide another element via class changes:
+
+- `.collapse` hides content
+- `.collapsing` is applied during transitions
+- `.collapse.show` shows content
+
+Generally, we recommend using a button with the `data-bs-target` attribute. the `data-bs-toggle="collapse"` is required. A `<button>` or `<a>` can show and hide multiple elements by referencing them with a selector in its `href` or `data-bs-target` attribute.
+`<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button> <div class="collapse multi-collapse" id="multiCollapseExample1">`
+
+### Dropdowns
+
+with Single button or `<a>` tag.
+
+```html
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+```
+
+can be split button with the addition of `.dropdown-toggle-split`. and can be used as navbar in phone or else...
+
+```html
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDarkDropdown"
+      aria-controls="navbarNavDarkDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dropdown
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+```
+
+will be:
+![](/bootStrap5.2/images/77.PNG)
+
+Directions have usage too: `.dropdown-center`, `.dropup`, `.dropup-center`, `.dropend`, `.dropstart`. Add `.active` to items in the dropdown to style them as active. Add `.disabled` to items in the dropdown to style them as disabled. To align right the dropdown menu with the given breakpoint or larger, add `.dropdown-menu{-sm|-md|-lg|-xl|-xxl}-end`. To align left the dropdown menu with the given breakpoint or larger, add `.dropdown-menu-end and .dropdown-menu{-sm|-md|-lg|-xl|-xxl}-start`.
+
+#### Menu content
+
+Add a header to label sections of actions in any dropdown menu. `<li><h6 class="dropdown-header">Dropdown header</h6></li>`. Separate groups of related menu items with a divider.`<li><hr class="dropdown-divider"></li>`. Put a form within a dropdown menu, or make it into a dropdown menu.
+
+```html
+<div class="dropdown">
+  <button
+    type="button"
+    class="btn btn-primary dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    data-bs-auto-close="outside"
+  >
+    Dropdown form
+  </button>
+  <form class="dropdown-menu p-4">
+    <div class="mb-3">
+      <label for="exampleDropdownFormEmail2" class="form-label"
+        >Email address</label
+      >
+      <input
+        type="email"
+        class="form-control"
+        id="exampleDropdownFormEmail2"
+        placeholder="email@example.com"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleDropdownFormPassword2" class="form-label"
+        >Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="exampleDropdownFormPassword2"
+        placeholder="Password"
+      />
+    </div>
+    <div class="mb-3">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="dropdownCheck2" />
+        <label class="form-check-label" for="dropdownCheck2">
+          Remember me
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+</div>
+```
+
+### List group
+
+The most basic list group is an unordered list with list items and the proper classes. Add `.active` to a `.list-group-item` to indicate the current active selection. Add `.disabled` to a `.list-group-item` to make it appear disabled. Use `<a>`s or `<button>`s to create actionable list group items. Add `.list-group-flush` to remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards). Add the `.list-group-numbered` modifier class group items. Add `.list-group-horizontal` to change the layout of list group items from vertical to horizontal across all breakpoints.
+
+### Modal
+
+```html
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+You can also create a scrollable modal that allows scroll the modal body by adding `.modal-dialog-scrollable` to `.modal-dialog`. Add `.modal-dialog-centered` to `.modal-dialog` to vertically center the modal. Have a bunch of buttons that all trigger the same modal with slightly different contents? Use `event.relatedTarget` and `HTML data-bs-* attributes` to vary the contents of the modal depending on which button was clicked.
+Optional sizes :
+
+| Size    | Class           | Modal max-width |
+| ------- | --------------- | --------------- |
+| Small   | .modal-sm       | 300px           |
+| Default | None            | 500px           |
+| Large   | .modal-lg       | 800px           |
+| Extra   | large .modal-xl | 1140px          |
+
+Fullscreen Modal:
+
+| Class                      | Availability |
+| -------------------------- | ------------ |
+| .modal-fullscreen          | Always       |
+| .modal-fullscreen-sm-down  | 576px        |
+| .modal-fullscreen-md-down  | 768px        |
+| .modal-fullscreen-lg-down  | 992px        |
+| .modal-fullscreen-xl-down  | 1200px       |
+| .modal-fullscreen-xxl-down | 1400px       |
+
+### Navbar
+
+```html
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+```
+
+will be:
+![](/bootStrap5.2/images/78.PNG)
+
+### Offcanvas
+
+Below is an offcanvas example that is shown by default (via `.show` on `.offcanvas` and `.offcanvas.show` shows content).
+
+```html
+<a
+  class="btn btn-primary"
+  data-bs-toggle="offcanvas"
+  href="#offcanvasExample"
+  role="button"
+  aria-controls="offcanvasExample"
+>
+  Link with href
+</a>
+<button
+  class="btn btn-primary"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasExample"
+  aria-controls="offcanvasExample"
+>
+  Button with data-bs-target
+</button>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Some text as placeholder. In real life you can have the elements you have
+      chosen. Like, text, images, lists, etc.
+    </div>
+    <div class="dropdown mt-3">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+      >
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/79.PNG)
+
+add `.text-bg-dark` to the `.offcanvas` and `.btn-close-white` to `.btn-close` for proper styling with a dark offcanvas. Scrolling the `<body>` element is disabled when an offcanvas and its backdrop are visible. Use the `data-bs-scroll` attribute to enable `<body>` scrolling. `<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">`
+Responsive offcanvas classes are available across for each breakpoint.
+
+- .offcanvas
+- .offcanvas-sm
+- .offcanvas-md
+- .offcanvas-lg
+- .offcanvas-xl
+- .offcanvas-xxl
+
+There’s no default placement for offcanvas components, so you must add one of the modifier classes below.
+
+- .offcanvas-start places offcanvas on the left of the viewport (shown above)
+- .offcanvas-end places offcanvas on the right of the viewport
+- .offcanvas-top places offcanvas on the top of the viewport
+- .offcanvas-bottom places offcanvas on the bottom of the viewport
+
+### Pagination
+
+```html
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+```
+
+will be:
+![](/bootStrap5.2/images/80.PNG)
+
+Use `.disabled` for links that appear un-clickable and `.active` to indicate the current page. Add `.pagination-lg` or `.pagination-sm` for additional sizes. Change the alignment of pagination components with `.justify-content-center`, `.justify-content-end`.
+
+### Placeholders
+
+Use loading placeholders for your components or pages to indicate something may still be loading.
+
+In the example below, we take a typical card component and recreate it with placeholders applied to create a “loading card”. Size and proportions are the same between the two.
+
+```html
+<div class="card">
+  <img src="..." class="card-img-top" alt="..." />
+
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<div class="card" aria-hidden="true">
+  <img src="..." class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title placeholder-glow">
+      <span class="placeholder col-6"></span>
+    </h5>
+    <p class="card-text placeholder-glow">
+      <span class="placeholder col-7"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-6"></span>
+      <span class="placeholder col-8"></span>
+    </p>
+    <a
+      href="#"
+      tabindex="-1"
+      class="btn btn-primary disabled placeholder col-6"
+    ></a>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/81.PNG)
+
+How it works
+Create placeholders with the `.placeholder` class and a grid column class (e.g., `.col-6`) to set the `width`. They can replace the text inside an element or be added as a modifier class to an existing component.
+
+We apply additional styling to `.btns` via `::before` to ensure the `height` is respected. You may extend this pattern for other situations as needed, or add a `&nbsp;` within the element to reflect the height when actual text is rendered in its place.
+
+### Popovers
+
+```html
+<button
+  type="button"
+  class="btn btn-lg btn-danger"
+  data-bs-toggle="popover"
+  data-bs-title="Popover title"
+  data-bs-content="And here's some amazing content. It's very engaging. Right?"
+>
+  Click to toggle popover
+</button>
+```
+
+will be:
+![](/bootStrap5.2/images/82.PNG)
+
+`data-bs-content="Top popover">` can be top right bottom left. `data-bs-title="Dismissible popover"`
+will make it Dismissible.
+
+### Progress bar
+
+```html
+<div class="progress">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    aria-label="Basic example"
+    style="width: 25%"
+    aria-valuenow="25"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  ></div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/83.PNG)
+
+Add labels to your progress bars by placing text within the `.progress-bar`. set a height value on the `.progress`, so if you change that value the inner `.progress-bar` will automatically resize accordingly. Add `.progress-bar-striped` to any `.progress-bar` to apply a stripe via CSS gradient over the progress bar’s background color. The striped gradient can also be animated. Add `.progress-bar-animated` to `.progress-bar `to animate the stripes right to left via CSS3 animations.
+
+### Scrollspy
+
+Automatically update Bootstrap navigation or list group components based on scroll position to indicate which link is currently active in the viewport. Scrollspy toggles the `.active` class on anchor (`<a>`) elements when the element with the id referenced by the anchor’s href is scrolled into view. Scrollspy is best used in conjunction with a Bootstrap `nav component` or `list group`, but it will also work with any anchor elements in the current page.
+
+```html
+<div class="row">
+  <div class="col-4">
+    <nav
+      id="navbar-example3"
+      class="h-100 flex-column align-items-stretch pe-4 border-end"
+    >
+      <nav class="nav nav-pills flex-column">
+        <a class="nav-link" href="#item-1">Item 1</a>
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
+          <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
+        </nav>
+        <a class="nav-link" href="#item-2">Item 2</a>
+        <a class="nav-link" href="#item-3">Item 3</a>
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
+          <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+        </nav>
+      </nav>
+    </nav>
+  </div>
+
+  <div class="col-8">
+    <div
+      data-bs-spy="scroll"
+      data-bs-target="#navbar-example3"
+      data-bs-smooth-scroll="true"
+      class="scrollspy-example-2"
+      tabindex="0"
+    >
+      <div id="item-1">
+        <h4>Item 1</h4>
+        <p>...</p>
+      </div>
+      <div id="item-1-1">
+        <h5>Item 1-1</h5>
+        <p>...</p>
+      </div>
+      <div id="item-1-2">
+        <h5>Item 1-2</h5>
+        <p>...</p>
+      </div>
+      <div id="item-2">
+        <h4>Item 2</h4>
+        <p>...</p>
+      </div>
+      <div id="item-3">
+        <h4>Item 3</h4>
+        <p>...</p>
+      </div>
+      <div id="item-3-1">
+        <h5>Item 3-1</h5>
+        <p>...</p>
+      </div>
+      <div id="item-3-2">
+        <h5>Item 3-2</h5>
+        <p>...</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/84.PNG)
+
+Scrollspy also works with nested `.nav`s. If a nested `.nav` is `.active`, its parents will also be `.active`. Scroll the area next to the navbar and watch the active class change.
+
+### Spinners
+
+Normal spinner
+
+```html
+<div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+```
+
+Growing spinner
+
+```html
+<div class="spinner-grow" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+```
+
+with Buttons
+
+```html
+<button class="btn btn-primary" type="button" disabled>
+  <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+  ></span>
+  <span class="visually-hidden">Loading...</span>
+</button>
+<button class="btn btn-primary" type="button" disabled>
+  <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+  ></span>
+  Loading...
+</button>
+```
+
+### Toasts
+
+```html
+<button type="button" class="btn btn-primary" id="liveToastBtn">
+  Show live toast
+</button>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div
+    id="liveToast"
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="..." />
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">Hello, world! This is a toast message.</div>
+  </div>
+</div>
+```
+
+will be:
+![](/bootStrap5.2/images/85.PNG)
+
+### Tooltips
+
+Enable tooltips:
+
+```JavaScript
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+```
+
+Tooltips on links
+
+```html
+<p class="muted">
+  Placeholder text to demonstrate some
+  <a href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
+    >inline links</a
+  >
+  with tooltips. This is now just filler, no killer. Content placed here just to
+  mimic the presence of
+  <a href="#" data-bs-toggle="tooltip" data-bs-title="Another tooltip"
+    >real text</a
+  >. And all that just to give you an idea of how tooltips would look when used
+  in real-world situations. So hopefully you've now seen how
+  <a href="#" data-bs-toggle="tooltip" data-bs-title="Another one here too"
+    >these tooltips on links</a
+  >
+  can work in practice, once you use them on
+  <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!"
+    >your own</a
+  >
+  site or project.
+</p>
+```
+
+---
+
+## Helpers
+
+### Clearfix
+
+Quickly and easily clear floated content within a container by adding a clearfix utility.`<div class="clearfix">...</div>`.
+
+### Color & background
+
+Set a background color with contrasting foreground color.
+
+```html
+<div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+  </div>
+</div>
+<div class="card text-bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+  </div>
+</div>
+```
+
+Use them in place of combined .text-_ and .bg-_ classes, like on badges
+
+### Colored links
+
+Colored links with hover states. You can use the `.link-*` classes to colorize links. `<a href="#" class="link-primary">Primary link</a>`
+
+### Position
+
+Use these helpers for quickly configuring the position of an element.
+
+- `.fixed-top`
+  Position an element at the top of the viewport, from edge to edge.
+- `.fixed-bottom`
+  Position an element at the bottom of the viewport, from edge to edge.
+- `.sticky-top`
+  Position an element at the top of the viewport, from edge to edge.
+- Responsive variations also exist for `.sticky-top` utility.
+- `.sticky-bottom`
+  Position an element at the bottom of the viewport, from edge to edge.
+
+### Vertical rule
+
+Use the custom vertical rule helper to create vertical dividers like the `<hr>` element.
+
+```html
+<div class="d-flex" style="height: 200px;">
+  <div class="vr"></div>
+</div>
+```
+
+### Visually hidden
+
+Use these helpers to visually hide elements but keep them accessible to assistive technologies.
+
+---
+
+## Utilities
+
+IDC :D.
