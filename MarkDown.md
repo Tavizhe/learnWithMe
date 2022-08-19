@@ -6,7 +6,7 @@ Similarly, to make phrases bold in Markdown, you can surround words with two ast
 
 To make headers in Markdown, you preface the phrase with a hash mark (#).
 
-To create an inline link, you wrap the link text in brackets ( [ ] ), and then you wrap the link in parenthesis ( ( ) ). [Visit GitHub!](www.github.com)
+To create an inline link, you wrap the link text in brackets ( [ ] ), and then you wrap the link in parenthesis ( ( ) ). [میم بیگدلی عزیز]([www.github.com](https://mimbigdeli.ir/downloads/garyvee-original-films/))
 
 To create an inline image link, enter an exclamation point ( ! ), wrap the alt text in brackets ( [ ] ), and then wrap the link in parenthesis ( ( ) ). (Alt text is a phrase or sentence that describes the image for the visually impaired.)
 ![Benjamin Bannekat](https://octodex.github.com/images/bannekat.png).
