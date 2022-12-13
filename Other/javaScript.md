@@ -1,5 +1,7 @@
 # javaScript Learning 2022
+
 > Learning By JohnSmilga
+
 ## Part 1: javaScript Basics
 
 in order to do some debugging we are going tro need these codes:
@@ -1566,4 +1568,3 @@ function addColor(time, element, color) {
   });
 }
 ```
-
