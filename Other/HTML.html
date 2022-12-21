@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML Introduction</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension dalirnet.rtl-markdown */
+body {
+    background: white;
+}
+
+.vscode-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid transparent;
+}
+
+.vscode-body.vscode-body--rtl {
+    direction: rtl;
+}
+
+.vscode-body blockquote {
+    background-color: initial;
+}
+
+.vscode-body pre {
+    color: initial;
+    background: #f7f7f7 !important;
+}
+
+.vscode-body code {
+    color: inherit;
+}
+
+.vscode-body pre code {
+    color: initial;
+}
+
+.vscode-body code > div {
+    background: none;
+}
+
+.vscode-body table th,
+.vscode-body table td {
+    border: 1px solid #ddd !important;
+}
+
+.vscode-body.showEditorSelection .code-active-line:before {
+    border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-body.showEditorSelection .code-line:hover:before {
+    border-left: 3px solid rgba(0, 0, 0, 0.4);
+}
+
+.vscode-body.showEditorSelection .code-line .code-line:hover:before {
+    border-left: none;
+}
+
+.vscode-body p,
+.vscode-body blockquote,
+.vscode-body ul,
+.vscode-body ol,
+.vscode-body dl,
+.vscode-body table,
+.vscode-body pre {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+body.vscode-body::-webkit-scrollbar {
+    background-color: white;
+}
+body.vscode-body::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.4);
+}
+body.vscode-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 100, 100, 0.7);
+}
+
+/*
+
+    Based from https://github.com/sindresorhus/github-markdown-css
+
+*/
+.vscode-body .octicon {
+    display: inline-block;
+    fill: currentColor;
+    vertical-align: text-bottom;
+}
+
+.vscode-body .anchor {
+    float: left;
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+}
+
+.vscode-body .anchor:focus {
+    outline: none;
+}
+
+.vscode-body h1 .octicon-link,
+.vscode-body h2 .octicon-link,
+.vscode-body h3 .octicon-link,
+.vscode-body h4 .octicon-link,
+.vscode-body h5 .octicon-link,
+.vscode-body h6 .octicon-link {
+    color: #1b1f23;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+.vscode-body h1:hover .anchor,
+.vscode-body h2:hover .anchor,
+.vscode-body h3:hover .anchor,
+.vscode-body h4:hover .anchor,
+.vscode-body h5:hover .anchor,
+.vscode-body h6:hover .anchor {
+    text-decoration: none;
+}
+
+.vscode-body h1:hover .anchor .octicon-link,
+.vscode-body h2:hover .anchor .octicon-link,
+.vscode-body h3:hover .anchor .octicon-link,
+.vscode-body h4:hover .anchor .octicon-link,
+.vscode-body h5:hover .anchor .octicon-link,
+.vscode-body h6:hover .anchor .octicon-link {
+    visibility: visible;
+}
+
+.vscode-body h1:hover .anchor .octicon-link:before,
+.vscode-body h2:hover .anchor .octicon-link:before,
+.vscode-body h3:hover .anchor .octicon-link:before,
+.vscode-body h4:hover .anchor .octicon-link:before,
+.vscode-body h5:hover .anchor .octicon-link:before,
+.vscode-body h6:hover .anchor .octicon-link:before {
+    width: 16px;
+    height: 16px;
+    content: " ";
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+}
+.vscode-body {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+    color: #24292e;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.vscode-body details {
+    display: block;
+}
+
+.vscode-body summary {
+    display: list-item;
+}
+
+.vscode-body a {
+    background-color: initial;
+}
+
+.vscode-body a:active,
+.vscode-body a:hover {
+    outline-width: 0;
+}
+
+.vscode-body strong {
+    font-weight: inherit;
+    font-weight: bolder;
+}
+
+.vscode-body h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+.vscode-body img {
+    border-style: none;
+}
+
+.vscode-body code,
+.vscode-body kbd,
+.vscode-body pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+.vscode-body hr {
+    box-sizing: initial;
+    height: 0;
+    overflow: visible;
+}
+
+.vscode-body input {
+    font: inherit;
+    margin: 0;
+}
+
+.vscode-body input {
+    overflow: visible;
+}
+
+.vscode-body [type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.vscode-body * {
+    box-sizing: border-box;
+}
+
+.vscode-body input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.vscode-body a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.vscode-body a:hover {
+    text-decoration: underline;
+}
+
+.vscode-body strong {
+    font-weight: 600;
+}
+
+.vscode-body hr {
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #dfe2e5;
+}
+
+.vscode-body hr:after,
+.vscode-body hr:before {
+    display: table;
+    content: "";
+}
+
+.vscode-body hr:after {
+    clear: both;
+}
+
+.vscode-body table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.vscode-body td,
+.vscode-body th {
+    padding: 0;
+}
+
+.vscode-body details summary {
+    cursor: pointer;
+}
+
+.vscode-body kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.vscode-body h1,
+.vscode-body h2,
+.vscode-body h3,
+.vscode-body h4,
+.vscode-body h5,
+.vscode-body h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.vscode-body h1 {
+    font-size: 32px;
+}
+
+.vscode-body h1,
+.vscode-body h2 {
+    font-weight: 600;
+}
+
+.vscode-body h2 {
+    font-size: 24px;
+}
+
+.vscode-body h3 {
+    font-size: 20px;
+}
+
+.vscode-body h3,
+.vscode-body h4 {
+    font-weight: 600;
+}
+
+.vscode-body h4 {
+    font-size: 16px;
+}
+
+.vscode-body h5 {
+    font-size: 14px;
+}
+
+.vscode-body h5,
+.vscode-body h6 {
+    font-weight: 600;
+}
+
+.vscode-body h6 {
+    font-size: 12px;
+}
+
+.vscode-body p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.vscode-body blockquote {
+    margin: 0;
+}
+
+.vscode-body ol,
+.vscode-body ul {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.vscode-body ol ol,
+.vscode-body ul ol {
+    list-style-type: lower-roman;
+}
+
+.vscode-body ol ol ol,
+.vscode-body ol ul ol,
+.vscode-body ul ol ol,
+.vscode-body ul ul ol {
+    list-style-type: lower-alpha;
+}
+
+.vscode-body dd {
+    margin-left: 0;
+}
+
+.vscode-body code,
+.vscode-body pre {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 12px;
+}
+
+.vscode-body pre {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.vscode-body input::-webkit-inner-spin-button,
+.vscode-body input::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.vscode-body :checked + .radio-label {
+    position: relative;
+    z-index: 1;
+    border-color: #0366d6;
+}
+
+.vscode-body .border {
+    border: 1px solid #e1e4e8 !important;
+}
+
+.vscode-body .border-0 {
+    border: 0 !important;
+}
+
+.vscode-body .border-bottom {
+    border-bottom: 1px solid #e1e4e8 !important;
+}
+
+.vscode-body .rounded-1 {
+    border-radius: 3px !important;
+}
+
+.vscode-body .bg-white {
+    background-color: #fff !important;
+}
+
+.vscode-body .bg-gray-light {
+    background-color: #fafbfc !important;
+}
+
+.vscode-body .text-gray-light {
+    color: #6a737d !important;
+}
+
+.vscode-body .mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.vscode-body .my-2 {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.vscode-body .pl-0 {
+    padding-left: 0 !important;
+}
+
+.vscode-body .py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.vscode-body .pl-1 {
+    padding-left: 4px !important;
+}
+
+.vscode-body .pl-2 {
+    padding-left: 8px !important;
+}
+
+.vscode-body .py-2 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.vscode-body .pl-3,
+.vscode-body .px-3 {
+    padding-left: 16px !important;
+}
+
+.vscode-body .px-3 {
+    padding-right: 16px !important;
+}
+
+.vscode-body .pl-4 {
+    padding-left: 24px !important;
+}
+
+.vscode-body .pl-5 {
+    padding-left: 32px !important;
+}
+
+.vscode-body .pl-6 {
+    padding-left: 40px !important;
+}
+
+.vscode-body .f6 {
+    font-size: 12px !important;
+}
+
+.vscode-body .lh-condensed {
+    line-height: 1.25 !important;
+}
+
+.vscode-body .text-bold {
+    font-weight: 600 !important;
+}
+
+.vscode-body .pl-c {
+    color: #6a737d;
+}
+
+.vscode-body .pl-c1,
+.vscode-body .pl-s .pl-v {
+    color: #005cc5;
+}
+
+.vscode-body .pl-e,
+.vscode-body .pl-en {
+    color: #6f42c1;
+}
+
+.vscode-body .pl-s .pl-s1,
+.vscode-body .pl-smi {
+    color: #24292e;
+}
+
+.vscode-body .pl-ent {
+    color: #22863a;
+}
+
+.vscode-body .pl-k {
+    color: #d73a49;
+}
+
+.vscode-body .pl-pds,
+.vscode-body .pl-s,
+.vscode-body .pl-s .pl-pse .pl-s1,
+.vscode-body .pl-sr,
+.vscode-body .pl-sr .pl-cce,
+.vscode-body .pl-sr .pl-sra,
+.vscode-body .pl-sr .pl-sre {
+    color: #032f62;
+}
+
+.vscode-body .pl-smw,
+.vscode-body .pl-v {
+    color: #e36209;
+}
+
+.vscode-body .pl-bu {
+    color: #b31d28;
+}
+
+.vscode-body .pl-ii {
+    color: #fafbfc;
+    background-color: #b31d28;
+}
+
+.vscode-body .pl-c2 {
+    color: #fafbfc;
+    background-color: #d73a49;
+}
+
+.vscode-body .pl-c2:before {
+    content: "^M";
+}
+
+.vscode-body .pl-sr .pl-cce {
+    font-weight: 700;
+    color: #22863a;
+}
+
+.vscode-body .pl-ml {
+    color: #735c0f;
+}
+
+.vscode-body .pl-mh,
+.vscode-body .pl-mh .pl-en,
+.vscode-body .pl-ms {
+    font-weight: 700;
+    color: #005cc5;
+}
+
+.vscode-body .pl-mi {
+    font-style: italic;
+    color: #24292e;
+}
+
+.vscode-body .pl-mb {
+    font-weight: 700;
+    color: #24292e;
+}
+
+.vscode-body .pl-md {
+    color: #b31d28;
+    background-color: #ffeef0;
+}
+
+.vscode-body .pl-mi1 {
+    color: #22863a;
+    background-color: #f0fff4;
+}
+
+.vscode-body .pl-mc {
+    color: #e36209;
+    background-color: #ffebda;
+}
+
+.vscode-body .pl-mi2 {
+    color: #f6f8fa;
+    background-color: #005cc5;
+}
+
+.vscode-body .pl-mdr {
+    font-weight: 700;
+    color: #6f42c1;
+}
+
+.vscode-body .pl-ba {
+    color: #586069;
+}
+
+.vscode-body .pl-sg {
+    color: #959da5;
+}
+
+.vscode-body .pl-corl {
+    text-decoration: underline;
+    color: #032f62;
+}
+
+.vscode-body .mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.vscode-body .my-2 {
+    margin-bottom: 8px !important;
+}
+
+.vscode-body .my-2 {
+    margin-top: 8px !important;
+}
+
+.vscode-body .pl-0 {
+    padding-left: 0 !important;
+}
+
+.vscode-body .py-0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.vscode-body .pl-1 {
+    padding-left: 4px !important;
+}
+
+.vscode-body .pl-2 {
+    padding-left: 8px !important;
+}
+
+.vscode-body .py-2 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.vscode-body .pl-3 {
+    padding-left: 16px !important;
+}
+
+.vscode-body .pl-4 {
+    padding-left: 24px !important;
+}
+
+.vscode-body .pl-5 {
+    padding-left: 32px !important;
+}
+
+.vscode-body .pl-6 {
+    padding-left: 40px !important;
+}
+
+.vscode-body .pl-7 {
+    padding-left: 48px !important;
+}
+
+.vscode-body .pl-8 {
+    padding-left: 64px !important;
+}
+
+.vscode-body .pl-9 {
+    padding-left: 80px !important;
+}
+
+.vscode-body .pl-10 {
+    padding-left: 96px !important;
+}
+
+.vscode-body .pl-11 {
+    padding-left: 112px !important;
+}
+
+.vscode-body .pl-12 {
+    padding-left: 128px !important;
+}
+
+.vscode-body hr {
+    border-bottom-color: #eee;
+}
+
+.vscode-body kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.vscode-body:after,
+.vscode-body:before {
+    display: table;
+    content: "";
+}
+
+.vscode-body:after {
+    clear: both;
+}
+
+.vscode-body > :first-child {
+    margin-top: 0 !important;
+}
+
+.vscode-body > :last-child {
+    margin-bottom: 0 !important;
+}
+
+.vscode-body a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.vscode-body blockquote,
+.vscode-body details,
+.vscode-body dl,
+.vscode-body ol,
+.vscode-body p,
+.vscode-body pre,
+.vscode-body table,
+.vscode-body ul {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.vscode-body hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+
+.vscode-body blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
+
+.vscode-body blockquote > :first-child {
+    margin-top: 0;
+}
+
+.vscode-body blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+.vscode-body h1,
+.vscode-body h2,
+.vscode-body h3,
+.vscode-body h4,
+.vscode-body h5,
+.vscode-body h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.vscode-body h1 {
+    font-size: 2em;
+}
+
+.vscode-body h1,
+.vscode-body h2 {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #eaecef;
+}
+
+.vscode-body h2 {
+    font-size: 1.5em;
+}
+
+.vscode-body h3 {
+    font-size: 1.25em;
+}
+
+.vscode-body h4 {
+    font-size: 1em;
+}
+
+.vscode-body h5 {
+    font-size: 0.875em;
+}
+
+.vscode-body h6 {
+    font-size: 0.85em;
+    color: #6a737d;
+}
+
+.vscode-body ol,
+.vscode-body ul {
+    padding-left: 2em;
+}
+
+.vscode-body ol ol,
+.vscode-body ol ul,
+.vscode-body ul ol,
+.vscode-body ul ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.vscode-body li {
+    word-wrap: break-all;
+}
+
+.vscode-body li > p {
+    margin-top: 16px;
+}
+
+.vscode-body li + li {
+    margin-top: 0.25em;
+}
+
+.vscode-body dl {
+    padding: 0;
+}
+
+.vscode-body dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.vscode-body dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+.vscode-body table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+.vscode-body table th {
+    font-weight: 600;
+}
+
+.vscode-body table td,
+.vscode-body table th {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+.vscode-body table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+.vscode-body table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+.vscode-body img {
+    max-width: 100%;
+    box-sizing: initial;
+    background-color: #fff;
+}
+
+.vscode-body img[align="right"] {
+    padding-left: 20px;
+}
+
+.vscode-body img[align="left"] {
+    padding-right: 20px;
+}
+
+.vscode-body code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+}
+
+.vscode-body pre {
+    word-wrap: normal;
+}
+
+.vscode-body pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+}
+
+.vscode-body .highlight {
+    margin-bottom: 16px;
+}
+
+.vscode-body .highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+}
+
+.vscode-body .highlight pre,
+.vscode-body pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+.vscode-body pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: initial;
+    border: 0;
+}
+
+.vscode-body .commit-tease-sha {
+    display: inline-block;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 90%;
+    color: #444d56;
+}
+
+.vscode-body .full-commit .btn-outline:not(:disabled):hover {
+    color: #005cc5;
+    border-color: #005cc5;
+}
+
+.vscode-body .blob-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.vscode-body .blob-wrapper-embedded {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.vscode-body .blob-num {
+    width: 1%;
+    min-width: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(27, 31, 35, 0.3);
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: top;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.vscode-body .blob-num:hover {
+    color: rgba(27, 31, 35, 0.6);
+}
+
+.vscode-body .blob-num:before {
+    content: attr(data-line-number);
+}
+
+.vscode-body .blob-code {
+    position: relative;
+    padding-right: 10px;
+    padding-left: 10px;
+    line-height: 20px;
+    vertical-align: top;
+}
+
+.vscode-body .blob-code-inner {
+    overflow: visible;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 12px;
+    color: #24292e;
+    word-wrap: normal;
+    white-space: pre;
+}
+
+.vscode-body .pl-token.active,
+.vscode-body .pl-token:hover {
+    cursor: pointer;
+    background: #ffea7f;
+}
+
+.vscode-body .tab-size[data-tab-size="1"] {
+    -moz-tab-size: 1;
+    tab-size: 1;
+}
+
+.vscode-body .tab-size[data-tab-size="2"] {
+    -moz-tab-size: 2;
+    tab-size: 2;
+}
+
+.vscode-body .tab-size[data-tab-size="3"] {
+    -moz-tab-size: 3;
+    tab-size: 3;
+}
+
+.vscode-body .tab-size[data-tab-size="4"] {
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+
+.vscode-body .tab-size[data-tab-size="5"] {
+    -moz-tab-size: 5;
+    tab-size: 5;
+}
+
+.vscode-body .tab-size[data-tab-size="6"] {
+    -moz-tab-size: 6;
+    tab-size: 6;
+}
+
+.vscode-body .tab-size[data-tab-size="7"] {
+    -moz-tab-size: 7;
+    tab-size: 7;
+}
+
+.vscode-body .tab-size[data-tab-size="8"] {
+    -moz-tab-size: 8;
+    tab-size: 8;
+}
+
+.vscode-body .tab-size[data-tab-size="9"] {
+    -moz-tab-size: 9;
+    tab-size: 9;
+}
+
+.vscode-body .tab-size[data-tab-size="10"] {
+    -moz-tab-size: 10;
+    tab-size: 10;
+}
+
+.vscode-body .tab-size[data-tab-size="11"] {
+    -moz-tab-size: 11;
+    tab-size: 11;
+}
+
+.vscode-body .tab-size[data-tab-size="12"] {
+    -moz-tab-size: 12;
+    tab-size: 12;
+}
+
+.vscode-body .task-list-item {
+    list-style-type: none;
+}
+
+.vscode-body .task-list-item + .task-list-item {
+    margin-top: 3px;
+}
+
+.vscode-body .task-list-item input {
+    margin: 0 0.2em 0.25em -1.6em;
+    vertical-align: middle;
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: peyda, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="html-introduction">HTML Introduction</h1>
+<p>HTML (Hyper Text Markup Language) is the standard markup language for creating Web pages Also describes the structure of a Web page.
+HTML consists of a series of elements that tell the browser how to display the content.
+as example: &quot;this is a heading&quot;, &quot;this is a paragraph&quot;, &quot;this is a link&quot;, etc.</p>
+<hr>
+<h2 id="html-documents">HTML Documents</h2>
+<p>All HTML documents must start with a document type declaration: <code>&lt;!DOCTYPE html&gt;</code>.The <code>&lt;!DOCTYPE&gt;</code> declaration represents the document type, and helps browsers to display web pages correctly.
+The HTML document itself begins with <code>&lt;html&gt;</code> and ends with <code>&lt;/html&gt;</code>.
+The visible part of the HTML document is between <code>&lt;body&gt;</code> and <code>&lt;/body&gt;</code>.</p>
+<h3 id="html-headings">HTML Headings</h3>
+<p>HTML headings are defined with the <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> tags. <code>&lt;h1&gt;</code> defines the most important heading. <code>&lt;h6&gt;</code> defines the least important heading.</p>
+<h3 id="html-paragraphs">HTML Paragraphs</h3>
+<p>HTML paragraphs are defined with the <code>&lt;p&gt;</code> tag.</p>
+<h4 id="html-display">HTML Display</h4>
+<p>You cannot be sure how HTML will be displayed.
+Large or small screens, and resized windows will create different results.
+With HTML, you cannot change the display by adding extra spaces or extra lines in your HTML code.
+The browser will automatically remove any extra spaces and lines when the page is displayed.</p>
+<h4 id="html-horizontal-rules">HTML Horizontal Rules</h4>
+<p>The <code>&lt;hr&gt;</code> element is used to separate content (or define a change) in an HTML page (as shape of line breaker).</p>
+<h4 id="html-line-breaks">HTML Line Breaks</h4>
+<p>Use <code>&lt;br&gt;</code> if you want a line break (a new line) without starting a new paragraph.</p>
+<h4 id="the-html-pre-element">The HTML <code>&lt;pre&gt;</code> element</h4>
+<p>The text inside a <code>&lt;pre&gt;</code> element is displayed in a fixed-width font (usually Courier), and it preserves both spaces and line breaks.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>
+  My Bonnie lies over the ocean.
+
+  My Bonnie lies over the sea.
+<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+</code></pre>
+<h3 id="html-links">HTML Links</h3>
+<p>HTML links are defined with the <code>&lt;a&gt;</code> tag. Example:
+<code>&lt;a href=&quot;https://www.w3schools.com&quot;&gt;This is a link&lt;/a&gt;</code>
+The link's destination is specified in the href attribute. Attributes are used to provide additional information about HTML elements.</p>
+<ul>
+<li>A link does not have to be text. A link can be an image or any other HTML element!</li>
+</ul>
+<h4 id="the-target-attribute">The target Attribute</h4>
+<p>By default, the linked page will be displayed in the current browser window. To change this, you must specify another target for the link.</p>
+<p>The <strong>target</strong> attribute specifies where to open the linked document Also can have one of the following values:</p>
+<ol>
+<li><code>_self</code> - Default. Opens the document in the same window/tab as it was clicked</li>
+<li><code>_blank</code> - Opens the document in a new window or tab</li>
+<li><code>_parent</code> - Opens the document in the parent frame</li>
+<li><code>_top</code> - Opens the document in the full body of the window</li>
+</ol>
+<ul>
+<li>Absolute URLs (a full web address)</li>
+<li>Relative URLs (A local link (a link to a page within the same website) is specified with a relative URL (without the &quot;<a href="https://www">https://www</a>&quot; part))</li>
+</ul>
+<blockquote>
+<p>How to Use an Image as a Link:</p>
+</blockquote>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;default.asp&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;smiley.gif&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;HTML tutorial&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:42px;height:42px;&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
+<h4 id="link-to-an-email-address">Link to an Email Address</h4>
+<p>Use mailto: inside the href attribute to create a link that opens the user's email program (to let them send a new email). Example:
+<code>&lt;a href=&quot;mailto:someone@example.com&quot;&gt;Send email&lt;/a&gt;</code></p>
+<h4 id="create-bookmarks">Create Bookmarks</h4>
+<p>Bookmarks can be useful if a web page is very long. To create a bookmark - first create the bookmark, then add a link to it. When the link is clicked, the page will scroll down or up to the location with the bookmark as example below:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!--First, use the id attribute to create a bookmark:--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;C4&quot;</span>&gt;</span>Chapter 4<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-comment">&lt;!--Then, add a link to the bookmark (&quot;Jump to Chapter 4&quot;), from within the same page:--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#C4&quot;</span>&gt;</span>Jump to Chapter 4<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre>
+<ul>
+<li>You can also add a link to a bookmark on another page: <code>&lt;a href=&quot;html_demo.html#C4&quot;&gt;Jump to Chapter 4&lt;/a&gt;</code></li>
+</ul>
+<h3 id="html-images">HTML Images</h3>
+<p>HTML images are defined with the <code>&lt;img&gt;</code> tag. The source file (src), alternative text (alt), width, and height are provided as attributes. Example:</p>
+<p><code>&lt;img src=&quot;w3schools.jpg&quot; alt=&quot;W3Schools.com&quot; width=&quot;104&quot; height=&quot;142&quot;&gt;</code></p>
+<h4 id="image-maps">Image Maps</h4>
+<p>The HTML <code>&lt;map&gt;</code> tag defines an image map. An image map is an image with clickable areas. The areas are defined with one or more <code>&lt;area&gt;</code> tags.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;workplace.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Workplace&quot;</span> <span class="hljs-attr">usemap</span>=<span class="hljs-string">&quot;#workmap&quot;</span> /&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">map</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;workmap&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">area</span>
+    <span class="hljs-attr">shape</span>=<span class="hljs-string">&quot;rect&quot;</span>
+    <span class="hljs-attr">coords</span>=<span class="hljs-string">&quot;34,44,270,350&quot;</span>
+    <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Computer&quot;</span>
+    <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;computer.htm&quot;</span>
+  /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">area</span> <span class="hljs-attr">shape</span>=<span class="hljs-string">&quot;rect&quot;</span> <span class="hljs-attr">coords</span>=<span class="hljs-string">&quot;290,172,333,250&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Phone&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;phone.htm&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">area</span> <span class="hljs-attr">shape</span>=<span class="hljs-string">&quot;circle&quot;</span> <span class="hljs-attr">coords</span>=<span class="hljs-string">&quot;337,300,44&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Coffee&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;coffee.htm&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">map</span>&gt;</span>
+</code></pre>
+<h5 id="the-areas">The Areas</h5>
+<p>A clickable area is defined using an <code>&lt;area&gt;</code> element.</p>
+<ul>
+<li>Shape: You must define the shape of the clickable area, and you can choose one of these values:</li>
+</ul>
+<ol>
+<li>
+<p>rect - defines a rectangular region (he coordinates for shape=&quot;rect&quot; come in pairs, one for the x-axis and one for the y-axis.)
+Example: the coordinates 34,44 is located 34 pixels from the left margin and 44 pixels from the top:</p>
+<center><img src="file:////Other/Html%20Images%20Reference/1.png" alt="Picture" style="align=center" /></center>
+</li>
+<li>
+<p>circle - defines a circular region (first locate the coordinates of the center of the circle: 337,300 Then specify the radius of the circle: 44 pixels)
+Example:</p>
+ <center><img src="file:////Other/Html%20Images%20Reference/2.png" alt="Picture" style="align=center" /></center>
+</li>
+<li>
+<p>poly - defines a polygonal region (contains several coordinate points, which creates a shape formed with straight lines (a polygon).)
+Example:</p>
+<center><img src="file:////Other/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
+So The coordinates come in pairs, one for the x-axis and one for the y-axis like:
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">area</span>
+  <span class="hljs-attr">shape</span>=<span class="hljs-string">&quot;poly&quot;</span>
+  <span class="hljs-attr">coords</span>=<span class="hljs-string">&quot;140,121,181,116,204,160,204,222,191,270,140,329,85,355,58,352,37,322,40,259,103,161,128,147&quot;</span>
+  <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;croissant.htm&quot;</span>
+/&gt;</span>
+</code></pre>
+</li>
+<li>
+<p>default - defines the entire region</p>
+</li>
+</ol>
+<p>You must also define some coordinates to be able to place the clickable area onto the image.</p>
+<h2 id="html-elements">HTML Elements</h2>
+<p>The HTML element is everything from the start tag to the end tag.</p>
+<blockquote>
+<p>Nested HTML Elements : HTML elements can be nested (this means that elements can contain other elements).
+All HTML documents consist of nested HTML elements.</p>
+</blockquote>
+<ul>
+<li>The <code>&lt;html&gt;</code> element is the root element and it defines the whole HTML document.</li>
+<li>It has a start tag <code>&lt;html&gt;</code> and an end tag <code>&lt;/html&gt;</code>.</li>
+<li>Then, inside the <code>&lt;html&gt;</code> element there is a <code>&lt;body&gt;</code> element.</li>
+<li>HTML is Not Case Sensitive.</li>
+</ul>
+<blockquote>
+<p><strong>The lang Attribute</strong>: You should always include the lang attribute inside the <code>&lt;html&gt;</code> tag, to declare the language of the Web page. This is meant to assist search engines and browsers. The following example specifies English as the language and United States as the country:</p>
+</blockquote>
+<pre><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en-US&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p><strong>The title Attribute</strong>: The title attribute defines some extra information about an element as a tooltip.</p>
+</blockquote>
+<ul>
+<li>Always Use Lowercase Attributes And Always Quote Attribute Values. BTW Double quotes around attribute values are the most common in HTML.</li>
+</ul>
+<hr>
+<h2 id="html-styles">HTML Styles</h2>
+<p>The HTML style attribute is used to add styles to an element, such as color, font, size, and more.</p>
+<h3 id="background-color-and-image">Background Color and Image</h3>
+<p>The CSS background-color property defines the background color for an HTML element. use the HTML style attribute and the CSS background-image property.</p>
+<h3 id="text-color">Text Color</h3>
+<p>The CSS color property defines the text color for an HTML element:</p>
+<h3 id="fonts">Fonts</h3>
+<p>The CSS font-family property defines the font to be used for an HTML element:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-family:verdana;&quot;</span>&gt;</span>This is a heading<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</code></pre>
+<h3 id="text-size">Text Size</h3>
+<p>The CSS font-size property defines the text size for an HTML element:</p>
+<h3 id="text-alignment">Text Alignment</h3>
+<p>The CSS text-align property defines the horizontal text alignment for an HTML element:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;text-align:center;&quot;</span>&gt;</span>Centered Heading<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</code></pre>
+<hr>
+<h2 id="html-text-formatting">HTML Text Formatting</h2>
+<p>HTML Formatting Elements
+Formatting elements were designed to display special types of text:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>
+  - Bold text
+  <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>
+    - Important text (*The HTML <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span> element defines text with strong importance. The content inside is typically displayed in bold*).
+    <span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>
+      - Italic text (*The <span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span> tag is often used to indicate a technical term, a phrase from another language, a thought, a ship name, etc.*)
+      <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>
+        - Emphasized text (*The HTML <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span> element defines emphasized (a word from another language that has special meaning) text. The content inside is typically displayed in italic.*)
+        <span class="hljs-tag">&lt;<span class="hljs-name">mark</span>&gt;</span>
+          - Marked text (*defines text that should be marked or highlighted*)
+          <span class="hljs-tag">&lt;<span class="hljs-name">small</span>&gt;</span>
+            - Smaller text
+            <span class="hljs-tag">&lt;<span class="hljs-name">del</span>&gt;</span>
+              - Deleted text (*Browsers will usually strike a line through deleted text*)
+              <span class="hljs-tag">&lt;<span class="hljs-name">ins</span>&gt;</span>
+                - Inserted text (*Browsers will usually underline inserted text*)
+                <span class="hljs-tag">&lt;<span class="hljs-name">sub</span>&gt;</span> - Subscript text(*Subscript text appears half a character below the normal line, and is sometimes rendered in a smaller font. Subscript text can be used for chemical formulas, like H2O*) <span class="hljs-tag">&lt;<span class="hljs-name">sup</span>&gt;</span> - Superscript text(* Superscript text appears half a character above the normal line, and is sometimes rendered in a smaller font. Superscript text can be used for footnotes, like WWW[1]*)<span class="hljs-tag">&lt;/<span class="hljs-name">sup</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">sub</span>&gt;</span>&lt;/ins
+              &gt;&lt;/del
+            &gt;&lt;/small
+          &gt;&lt;/mark
+        &gt;&lt;/em
+      &gt;&lt;/i
+    &gt;&lt;/strong
+  &gt;&lt;/b
+&gt;
+</code></pre>
+<h2 id="html-quotation-and-citation-taghdirname-elements">HTML Quotation and Citation (taghdirname) Elements</h2>
+<ul>
+<li>
+<p>The HTML <code>&lt;blockquote&gt;</code> element defines a section that is quoted from another source.The HTML <code>&lt;q&gt;</code> tag defines a short quotation.</p>
+</li>
+<li>
+<p>HTML <code>&lt;abbr&gt;</code> for Abbreviations (ekhtesar). Example:</p>
+</li>
+</ul>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+  The <span class="hljs-tag">&lt;<span class="hljs-name">abbr</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;World Health Organization&quot;</span>&gt;</span>WHO<span class="hljs-tag">&lt;/<span class="hljs-name">abbr</span>&gt;</span> was founded in 1948.
+<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<ul>
+<li>HTML <code>&lt;address&gt;</code> for Contact Information that defines the contact information for the author/owner of a document or an article.</li>
+<li>HTML <code>&lt;cite&gt;</code> for Work Title: The HTML <code>&lt;cite&gt;</code> tag defines the title of a creative work (e.g. a book, a poem, a song, a movie, a painting, a sculpture, etc.).The text in the <code>&lt;cite&gt;</code> element usually renders in italic. Example:</li>
+</ul>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">cite</span>&gt;</span>The Scream<span class="hljs-tag">&lt;/<span class="hljs-name">cite</span>&gt;</span> by Edvard Munch. Painted in 1893.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<ul>
+<li>HTML <code>&lt;bdo&gt;</code> for Bi-Directional Override (bar aks nevisi) : is used to override the current text direction.</li>
+</ul>
+<hr>
+<h2 id="html-comment-tag">HTML Comment Tag</h2>
+<p>You can add comments to your HTML source by using the following syntax:
+<code>&lt;!-- Write your comments here --&gt;</code></p>
+<ul>
+<li>Also Comments can be used to hide content. You can also hide more than one line. Everything between the <code>&lt;!--</code> and the <code>--&gt;</code> will be hidden from the display.</li>
+</ul>
+<hr>
+<h2 id="html-colors">HTML Colors</h2>
+<p>HTML colors are specified with predefined color names, or with RGB, HEX, HSL, RGBA, or HSLA values.</p>
+<h3 id="color-names">Color Names</h3>
+<p>In HTML, a color can be specified by using a color name like Tomato, Orange, DodgerBlue, MediumSeaGreen, Gray, SlateBlue, Violet, LightGray. HTML supports 140 standard color names. <a href="https://www.w3schools.com/colors/colors_names.asp">Check Here</a>. BTW we can colorize borders too.
+<code>&lt;h1 style=&quot;border:2px solid Tomato;&quot;&gt;Hello World&lt;/h1&gt;</code></p>
+<h3 id="color-values">Color Values</h3>
+<p>colors can also be specified using RGB values, HEX values, HSL values, RGBA values, and HSLA values like:</p>
+<ol>
+<li>rgb(255, 99, 71)</li>
+<li>#ff6347</li>
+<li>hsl(9, 100%, 64%)</li>
+<li>rgba(255, 99, 71, 0.5)</li>
+<li>hsla(9, 100%, 64%, 0.5)</li>
+</ol>
+<hr>
+<h2 id="html-picture-element">HTML <code>&lt;picture&gt;</code> Element</h2>
+<p>The HTML <code>&lt;picture&gt;</code> element allows you to display different pictures for different devices or screen sizes.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">picture</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">media</span>=<span class="hljs-string">&quot;(min-width: 650px)&quot;</span> <span class="hljs-attr">srcset</span>=<span class="hljs-string">&quot;img_food.jpg&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">media</span>=<span class="hljs-string">&quot;(min-width: 465px)&quot;</span> <span class="hljs-attr">srcset</span>=<span class="hljs-string">&quot;img_car.jpg&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img_girl.jpg&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">picture</span>&gt;</span>
+</code></pre>
+<h2 id="favicon-in-html">Favicon in HTML</h2>
+<p>A favicon image is displayed to the left of the page title in the browser tab, like this:</p>
+ <center><img src="file:////Other\Html Images Reference\img_favicon.png" alt="Favicon" style="align=center" /></center>
+ Example:
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Page Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;icon&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;image/x-icon&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/images/favicon.ico&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</code></pre>
+<h2 id="html-tables">HTML Tables</h2>
+<p>A table in HTML consists of table cells inside rows and columns. Each table cell is defined by a <code>&lt;td&gt;</code> and a <code>&lt;/td&gt;</code> tag (td stands for table data).also Each table row starts with a <code>&lt;tr&gt;</code> and ends with a <code>&lt;/tr&gt;</code> tag (tr stands for table row).</p>
+<h3 id="table-headers">Table Headers</h3>
+<p>Sometimes you want your cells to be table header cells. In those cases use the <code>&lt;th&gt;</code> tag instead of the <code>&lt;td&gt;</code> tag (th stands for table header).</p>
+<p>Example:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Person 1<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Person 2<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Person 3<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Emil<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Tobias<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Linus<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>16<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>14<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+<h3 id="add-a-border">Add a Border</h3>
+<p>To add a border, use the CSS border property on table, th, and td elements:</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">table</span>,
+<span class="hljs-selector-tag">th</span>,
+<span class="hljs-selector-tag">td</span> {
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid black;
+  <span class="hljs-attribute">border-collapse</span>: collapse; // avoiding doubler borders
+}
+<span class="hljs-selector-tag">th</span>,
+<span class="hljs-selector-tag">td</span> {
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>; // Round <span class="hljs-selector-tag">Table</span> Borders
+}
+</code></pre>
+<ul>
+<li>Dotted Table Borders also available in these forms (dotted, dashed, solid, double, groove, ridge, inset, outset, none, hidden).</li>
+</ul>
+<hr>
+<h3 id="html-table-sizes">HTML Table Sizes</h3>
+<p>HTML tables can have different sizes for each column, row or the entire table. Use the style attribute with the width or height properties to specify the size of a table, row or column. Example:</p>
+<center><img src="file:////Other\Html Images Reference\4.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:100%&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Firstname<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Lastname<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Age<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height:200px&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jill<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Smith<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>50<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Eve<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jackson<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>94<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+<h3 id="html-table-headers">HTML Table Headers</h3>
+<p>HTML tables can have headers for each column or row, or for many columns/rows.</p>
+<center><img src="file:////Other\Html Images Reference\5.png" alt="Favicon" style="align=center" /></center>
+<p>By default, table headers are bold and centered So To left-align the table headers, use the CSS text-align property.</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">th</span> {
+  <span class="hljs-attribute">text-align</span>: left;
+}
+</code></pre>
+<ul>
+<li>Header for Multiple Columns: use the colspan attribute on the <code>&lt;th&gt;</code> element.</li>
+</ul>
+<center><img src="file:////Other\Html Images Reference\6.png" alt="Favicon" style="align=center" /></center>
+<p>Example:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">colspan</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Age<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jill<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Smith<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>50<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Eve<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jackson<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>94<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+<ul>
+<li>Table Caption: You can add a caption that serves as a heading for the entire table.
+<code>&lt;caption&gt;Monthly savings&lt;/caption&gt;</code></li>
+</ul>
+<h3 id="html-table-padding--spacing">HTML Table Padding &amp; Spacing</h3>
+<p>HTML tables can adjust the padding inside the cells, and also the space between the cells.</p>
+<center><img src="file:////Other\Html Images Reference\7.png" alt="Favicon" style="align=center" /></center>
+<p>Example:</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">th</span>,
+<span class="hljs-selector-tag">td</span> {
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">40px</span>;
+  <span class="hljs-attribute">border-spacing</span>: <span class="hljs-number">30px</span>;
+}
+</code></pre>
+<h3 id="html-table-colspan--rowspan">HTML Table Colspan &amp; Rowspan</h3>
+<p>HTML tables can have cells that span over multiple rows and/or columns.</p>
+<center><img src="file:////Other\Html Images Reference\8.png" alt="Favicon" style="align=center" /></center>
+<ul>
+<li>
+<p>To make a cell span more than one column, use the colspan attribute.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">colspan</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Age<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jill<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Smith<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>43<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Eve<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jackson<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>57<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+</li>
+<li>
+<p>To make a cell span more than one row, use the rowspan attribute.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Jill<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">rowspan</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>Phone<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>555-1234<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>555-8745<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="html-table-styling">HTML Table Styling</h3>
+<p>Zebra Stripes:</p>
+<center><img src="file:////Other\Html Images Reference\9.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-css"><span class="hljs-selector-tag">tr</span><span class="hljs-selector-pseudo">:nth-child</span>(even) {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#d6eeee</span>;
+}
+</code></pre>
+<p>Vertical Zebra Stripes:</p>
+<center><img src="file:////Other\Html Images Reference\10.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-css"><span class="hljs-selector-tag">td</span><span class="hljs-selector-pseudo">:nth-child</span>(even),
+<span class="hljs-selector-tag">th</span><span class="hljs-selector-pseudo">:nth-child</span>(even) {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#d6eeee</span>;
+}
+</code></pre>
+<p><em>You can combine the styling from the two examples above and you will have stripes on every other row and every other column.</em></p>
+<ul>
+<li>Horizontal Dividers</li>
+</ul>
+<center><img src="file:////Other\Html Images Reference\11.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-css"><span class="hljs-selector-tag">tr</span> {
+  <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#ddd</span>;
+}
+</code></pre>
+<ul>
+<li>Hoverable Table:</li>
+</ul>
+<center><img src="file:////Other\Html Images Reference\12.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-css"><span class="hljs-selector-tag">tr</span> {
+  <span class="hljs-selector-tag">tr</span><span class="hljs-selector-pseudo">:hover</span> {
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#d6eeee</span>;
+  }
+}
+</code></pre>
+<h3 id="html-table-colgroup">HTML Table Colgroup</h3>
+<p>The <code>&lt;colgroup&gt;</code> element is used to style specific columns of a table. If you want to style the two first columns of a table, use the <code>&lt;colgroup&gt;</code> and <code>&lt;col&gt;</code> elements.</p>
+<center><img src="file:////Other\Html Images Reference\13.png" alt="Favicon" style="align=center" /></center>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">colgroup</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">col</span> <span class="hljs-attr">span</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color: #D6EEEE&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">colgroup</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>MON<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>TUE<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>WED<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>THU<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</code></pre>
+<p><strong>Remember</strong>:</p>
+<ul>
+<li>The <code>&lt;colgroup&gt;</code> element should be used as a container for the column specifications.</li>
+<li>Each group is specified with a <code>&lt;col&gt;</code> element.</li>
+<li>The span attribute specifies how many columns that get the style.</li>
+<li>The style attribute specifies the style to give the columns.</li>
+</ul>
+<h3 id="html-lists">HTML Lists</h3>
+<ul>
+<li><a href="/Other/HTML.html">Unordered HTML List</a>: starts with the <code>&lt;ul&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code>. (The list items will be marked with bullets (small black circles))</li>
+</ul>
+<blockquote>
+<p>The CSS list-style-type property is used to define the style of the list item marker. It can have one of the following values:</p>
+<ul>
+<li>disc - Sets the list item marker to a bullet (default)</li>
+<li>circle - Sets the list item marker to a circle</li>
+<li>square - Sets the list item marker to a square</li>
+<li>none - The list items will not be marked</li>
+</ul>
+</blockquote>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;list-style-type:square;&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Coffee<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Tea<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Milk<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+</code></pre>
+<ul>
+<li><a href="/Other/HTML.html">Ordered HTML List</a>: starts with the <code>&lt;ol&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code> tag. (The list items will be marked with numbers)</li>
+</ul>
+<blockquote>
+<p>The type attribute of the <code>&lt;ol&gt;</code> tag, defines the type of the list item marker:</p>
+<ul>
+<li>type=&quot;1&quot; - The list items will be numbered with numbers (default)</li>
+<li>type=&quot;A&quot; - The list items will be numbered with uppercase letters</li>
+<li>type=&quot;a&quot; - The list items will be numbered with lowercase letters</li>
+<li>type=&quot;I&quot; - The list items will be numbered with uppercase roman numbers</li>
+<li>type=&quot;i&quot; - The list items will be numbered with lowercase roman numbers</li>
+</ul>
+</blockquote>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">ol</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;A&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Coffee<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Tea<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Milk<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
+</code></pre>
+<h4 id="html-description-lists">HTML Description Lists</h4>
+<p>A description list is a list of terms, with a description of each term. The <code>&lt;dl&gt;</code> tag defines the description list, the <code>&lt;dt&gt;</code> tag defines the term (name), and the <code>&lt;dd&gt;</code> tag describes each term:</p>
+<p>Example:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Coffee<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>- black hot drink<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Milk<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>- white cold drink<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span>
+</code></pre>
+
+        
+        <script async type="text/javascript">
+/* From extension dalirnet.rtl-markdown */
+try {
+    const data = JSON.parse(document.head.querySelector('meta[id="vscode-markdown-preview-data"]').getAttribute('data-state'))
+    if (typeof data.resource === 'string') {
+        if (data.resource.match(/\.rtl\.md$/)) {
+            document.body.classList.add('vscode-body--rtl')
+        }
+    }
+} catch (e) {
+    console.log(e)
+}
+
+</script>
+
+    </body>
+    </html>
