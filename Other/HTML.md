@@ -1843,3 +1843,385 @@ SVG (stands for Scalable Vector Graphics) defines vector-based graphics in XML f
 ---
 
 ## HTML Multimedia
+
+- In **video** The MP4, WebM, and Ogg formats are supported by HTML.
+- MP3, WAV, and Ogg **audio** are supported by the HTML standard.
+- The HTML `<video>` element is used to show a video on a web page. Example:
+
+```html
+<video width="320" height="240" controls autoplay muted>
+  <!--adds video controls, like play, pause, and volume. To start a video automatically we use autoplay.-->
+  <source src="movie.mp4" type="video/mp4" />
+  <source src="movie.ogg" type="video/ogg" />
+  Your browser does not support the video tag.
+</video>
+```
+
+> Chromium browsers do not allow autoplay in most cases. However, muted autoplay is always allowed.
+
+- To play an audio file in HTML, use the `<audio>` element:
+
+---
+
+## HTML Plug-ins
+
+Plug-ins were designed to be used for many different purposes like: To display maps, scan for viruses, verify a bank id and many more.
+
+- The `<object>` & `<embed>` Element - defines an embedded object (like plug-ins) within an HTML document.
+  > Web browsers have supported the `<embed>` element for a long time. However, it has not been a part of the HTML specification before HTML5.
+
+in order to show youtube video the recommend way is this:
+
+```html
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY"
+>
+</iframe>
+<!--Add mute=1 after autoplay=1 to let your video start playing automatically (but muted).-->
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1"
+>
+</iframe>
+<!--Add loop=1 to let your video loop forever.-->
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?playlist=tgbNymZ7vqY&loop=1"
+>
+</iframe>
+<!--Add controls=0 to not display controls in the video player.-->
+<iframe
+  width="420"
+  height="315"
+  src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"
+>
+</iframe>
+```
+
+---
+
+## HTML APIs
+
+### HTML Geolocation API
+
+The HTML Geolocation API is used to locate a user's position.
+
+> Since this can compromise privacy, the position is not available unless the user approves it.
+
+- The `getCurrentPosition()` method in javascript is used to return the user's position.
+
+```JavaScript
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+```
+
+Example explained:
+
+- Check if Geolocation is supported
+- If supported, run the getCurrentPosition() method. If not, display a message to the user
+- If the getCurrentPosition() method is successful, it returns a coordinates object to the function specified in the parameter (showPosition)
+- The showPosition() function outputs the Latitude and Longitude
+
+The example above is a very basic Geolocation script, with no error handling. to handle the error and rejections use below JavaScript code:
+
+```JavaScript
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+```
+
+Geolocation is also very useful for location-specific information, like:
+
+- Up-to-date local information
+- Showing Points-of-interest near the user
+- Turn-by-turn navigation (GPS)
+
+The other properties are returned if available:
+
+| Property                | Returns                                                                 |
+| ----------------------- | ----------------------------------------------------------------------- |
+| coords.latitude         | The latitude as a decimal number (always returned)                      |
+| coords.longitude        | The longitude as a decimal number (always returned)                     |
+| coords.accuracy         | The accuracy of position (always returned)                              |
+| coords.altitude         | The altitude in meters above the mean sea level (returned if available) |
+| coords.altitudeAccuracy | The altitude accuracy of position (returned if available)               |
+| coords.heading          | The heading as degrees clockwise from North (returned if available)     |
+| coords.speed            | The speed in meters per second (returned if available)                  |
+| timestamp               | The date/time of the response (returned if available)                   |
+
+The Geolocation object also has other interesting methods:
+
+`watchPosition()` - Returns the current position of the user and continues to return updated position as the user moves (like the GPS in a car).
+`clearWatch()` - Stops the `watchPosition()` method.
+The example below shows the watchPosition() method.
+
+```JavaScript
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+```
+
+### HTML Drag and Drop API
+
+In HTML, any element can be dragged and dropped like example below:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      //4. By default, data/elements cannot be dropped in other elements. To allow a drop, we must prevent the default handling of the element.
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      //3. The dataTransfer.setData() method sets the data type and the value of the dragged data
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault(); //5. Call preventDefault() to prevent the browser default handling of the data (default is open as link on drop)
+        var data = ev.dataTransfer.getData("text"); //6. Get the dragged data with the dataTransfer.getData() method. This method will return any data that was set to the same type in the setData() method
+        ev.target.appendChild(document.getElementById(data)); //7. Append the dragged element into the drop element
+      }
+    </script>
+  </head>
+  <body>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <!--
+      1. `draggable` makes an element draggable
+      2. the `ondragstart` attribute calls a function, drag(event), that specifies what data to be dragged.
+    -->
+    <img
+      id="drag1"
+      src="img_logo.gif"
+      draggable="true"
+      ondragstart="drag(event)"
+      width="336"
+      height="69"
+    />
+  </body>
+</html>
+```
+
+### HTML Web Storage API
+
+> HTML web storage; better than cookies. Before HTML5, application data had to be stored in cookies, included in every server request. Web storage is more secure, and large amounts of data can be stored locally, without affecting website performance. Unlike cookies, the storage limit is far larger (at least 5MB) and information is never transferred to the server.
+
+#### HTML Web Storage Objects
+
+HTML web storage provides two objects for storing data on the client:
+
+- `window.localStorage` - stores data with no expiration date (The data will not be deleted when the browser is closed, and will be available the next day, week, or year.)
+  Example:
+
+```html
+<!--
+Store
+Create a localStorage name/value pair with name="lastname" and value="Smith"
+-->
+localStorage.setItem("lastname", "Smith");
+
+<!--
+Retrieve
+Retrieve the value of "lastname" and insert it into the element with id="result"
+-->
+document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+```
+
+The example above could also be written like this:
+
+```html
+<!-- Store -->
+localStorage.lastname = "Smith";
+<!-- Retrieve -->
+document.getElementById("result").innerHTML = localStorage.lastname;
+```
+
+> he syntax for removing the "lastname" localStorage item is as follows: `localStorage.removeItem("lastname");`
+
+The following example counts the number of times a user has clicked a button. In this code the value string is converted to a number to be able to increase the counter:
+
+```JavaScript
+if (localStorage.clickcount) {
+  localStorage.clickcount = Number(localStorage.clickcount) + 1;
+} else {
+  localStorage.clickcount = 1;
+}
+document.getElementById("result").innerHTML = "You have clicked the button " +
+localStorage.clickcount + " time(s).";
+```
+
+- `window.sessionStorage` - stores data for one session (data is lost when the browser tab is closed)
+  The following example counts the number of times a user has clicked a button, in the current session:
+
+```JavaScript
+if (sessionStorage.clickcount) {
+  sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+} else {
+  sessionStorage.clickcount = 1;
+}
+document.getElementById("result").innerHTML = "You have clicked the button " +
+sessionStorage.clickcount + " time(s) in this session.";
+```
+
+### HTML Web Workers API
+
+A web worker is a JavaScript running in the background, without affecting the performance of the page.When executing scripts in an HTML page, the page becomes unresponsive until the script is finished. with web worker JavaScript independently of other scripts, without affecting the performance of the page, runs in the background.
+
+Now, let's create our web worker in an external JavaScript.
+The script is stored in the "demo_workers.js" file:
+
+```JavaScript
+var i = 0;
+
+function timedCount() {
+  i = i + 1;
+  postMessage(i);
+  setTimeout("timedCount()",500);
+}
+
+timedCount();
+```
+
+The important part of the code above is the `postMessage()` method - which is used to post a message back to the HTML page.
+
+Add an "onmessage" event listener to the web worker.
+
+```JavaScript
+w.onmessage = function(event){
+  document.getElementById("result").innerHTML = event.data;
+};
+```
+
+When the web worker posts a message, the code within the event listener is executed. The data from the web worker is stored in event.data.
+
+> to terminate a web worker use : `w.terminate();`
+
+a complete Example:
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Count numbers: <output id="result"></output></p>
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+
+    <p>
+      <strong>Note:</strong> Internet Explorer 9 and earlier versions do not
+      support Web Workers.
+    </p>
+
+    <script>
+      var w;
+
+      function startWorker() {
+        if (typeof Worker !== "undefined") {
+          if (typeof w == "undefined") {
+            w = new Worker("demo_workers.js");
+          }
+          w.onmessage = function (event) {
+            document.getElementById("result").innerHTML = event.data;
+          };
+        } else {
+          document.getElementById("result").innerHTML =
+            "Sorry, your browser does not support Web Workers...";
+        }
+      }
+
+      function stopWorker() {
+        w.terminate();
+        w = undefined;
+      }
+    </script>
+  </body>
+</html>
+```
+
+### HTML SSE API
+
+Server-Sent Events (SSE) allow a web page to get updates from a server.
+A server-sent event is when a web page automatically gets updates from a server. but it's One Way Messaging.
+
+- The EventSource object is used to receive server-sent event notifications:
+
+```JavaScript
+var source = new EventSource("demo_sse.php");
+source.onmessage = function(event) {
+  document.getElementById("result").innerHTML += event.data + "<br>";
+};
+```
+
+Example explained:
+
+- Create a new EventSource object, and specify the URL of the page sending the updates (in this example "demo_sse.php")
+- Each time an update is received, the onmessage event occurs
+- When an onmessage event occurs, put the received data into the element with id="result"
+
+#### Server-Side Code Example
+
+The server-side event stream syntax is simple. Set the "Content-Type" header to "text/event-stream". Now you can start sending event streams.
+
+Code in PHP (demo_sse.php):
+
+```php
+<?php
+header('Content-Type: text/event-stream');
+header('Cache-Control: no-cache');
+
+$time = date('r');
+echo "data: The server time is: {$time}\n\n";
+flush();
+?>
+```
+
+Code explained:
+
+- Set the "Content-Type" header to "text/event-stream"
+- Specify that the page should not cache
+- Output the data to send (Always start with "data: ")
+- Flush the output data back to the web page
+
+if you are looking for more example Use this [link](https://www.w3schools.com/html/html_examples.asp)
