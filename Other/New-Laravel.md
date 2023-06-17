@@ -66,35 +66,23 @@ to see all commands.
 
 ## Routing
 
-Routes are defined inside the Route folder in `api.php` and `web.php` files. in api.php we use to just use to return JSON in API formats.
-Routing in Laravel allows you to route all your application requests to their appropriate controller. The application's route file gets defined in the app/Http/routes.php file. The general routing in Laravel for each of the possible requests looks something like this:
+Routes are defined inside the Route folder in `api.php` and `web.php` files. in `api.php` we use to just use to return `JSON` in `API` formats.
+Routing in Laravel allows you to route all your application requests to their appropriate controller. The application's route file gets defined in the `app/Http/routes.php` file. The general routing in Laravel for each of the possible requests looks something like this:
 
 > Use `use Illuminate\Support\Facades\Route` in order to use routes in project.
 
-![Routes in laravel](laravel/1.png)
+![Routes in laravel](Laravel%20Images%20Reference/1.png)
 
 ```php
 // http://localhost/
-//first static method used with get
-Route:: get ('/', function () {// '/' is the uri (means anything that comes after your root domain) and func is a controller that can be a method in our class or anonymous function
-   return 'Welcome to index';
-})->('Home.index'); //this is how you can name your routes so they make sense by reading it
+Route:: get ('/', function () {// '/' is the uri (means anything that comes after your root domain) and func is a controller that can be a method in our class or anonymous function!
+   return view('Home');
+})->('Home.index'); // this is how you can name your routes so they make sense by reading it
 
-// http://localhost/user/dashboard
-
-Route:: post('user/dashboard', function () {
-   return 'Welcome to dashboard';
-});
-// http://localhost/user/add
-
-Route:: put('user/add', function () {
-//
-});
-// http://localhost/post/example
-
-Route:: delete('post/example', function () {
-//
-})->('Home.Post');
+<!-- Another Example -->
+// Defining a route that only renders a Blade template
+Route::view('/Home'); // Without parameters
+Route::view('/Home', ['data' => 'value']); // With parameters
 ```
 
 - command `php artisan route:list` shows all of routes in our project.
@@ -104,6 +92,10 @@ Route:: delete('post/example', function () {
 1. First of all, you have to create and run the root URL of your project.
 2. The URL you run needs to be matched exactly with your method defined in the root.php file.
 3. The function invokes the template files. It then calls the `view()` function with the file name located in `resources/views/`.
+
+- It is good to know that routes have 4 functionalities like :`get()`,`post()`,`put()` and `delete()`.
+
+![Route-functionalities](Laravel%20Images%20Reference/2.png)
 
 #### Route Parameters
 
@@ -128,7 +120,7 @@ return 'Posts from ' . $daysAgo .' days ago';
 });
 ```
 
-> Note - always name your routes!
+> Note - always name your routes! It is always wise to name our blade templates (views) as routes connected to them! Happy Coding.
 
 In last Example the required parameter have to be a number, we can specify in route so it always be a number like Example bellow:
 
@@ -141,3 +133,61 @@ Route :: get ('posts/{id}', function ($id) {
 ```
 
 > Note - we all know that ids are always a number. we should not always write `where(['id' => [0-9]+])`. To avoid repeating the code we do it in global, editing `app/provider/RouteServiceProvider.php` by adding repeated code as a pattern in line 49. For Example:`Route::pattern('id', '[0-9]+');`
+
+## Views
+
+A view is a file containing a mix of PHP code, HTML markup, and Blade templates. These templates contain placeholders for dynamic content and are used to define the structure and layout of a web page. By default, Laravel comes with a set of predefined views, such as `welcome.blade.php` and `errors/404.blade.php`.
+
+> Note: Views are stored in the `resources/views`.
+
+### Creating a View
+
+To create a view in Laravel, follow these steps:
+
+1. Navigate to the `resources/views` directory in your Laravel project.
+2. Create a new file with a `fileName.blade.php` extension. This extension tells Laravel to use the Blade template engine to parse the view.
+3. In the view file, add the HTML, PHP, and/or Blade templates that define the structure and layout of the page. You can use placeholders for dynamic content, such as or.
+
+For Example:
+
+```php
+<!-- resources/views/greeting.blade.php -->
+
+<h1>Hello, {{$name}}!</h1> // $name is a placeholder for dynamic content
+```
+
+### Rendering a View
+
+**View helper functions** can be used to display a view in a Laravel application. This function takes the name of the view as its first argument and an array of data as its second argument. For Example:
+
+```php
+// in a Laravel controller
+return view('greeting', ['name' => 'Alex']);
+
+// in routes/greeting.php
+Route::get('/greeting', function () {
+    return view('greeting', ['name' => 'Alex']);
+});
+```
+
+### Layouts
+
+a layout is a blade template that defines the basic structure of a webpage. It usually consists of HTML head and body tags and may include links to CSS and JavaScript files and other common elements such as headers, footers, and navigation menus. It can also have placeholders for dynamic content, such as the page title and main content. For Example and more Content:
+
+```php
+<!-- Stored in resources/views/home.blade.php -->
+
+@extends('layouts.app') // tells Laravel to use the app layout as the parent template.
+
+@section('title', 'Home') // define the sections that will be rendered in the layout.
+
+@section('sidebar')
+    @parent // tells Laravel to append the content to the sidebar section defined in the layout rather than replacing it.
+
+    <p>This is appended to the master sidebar.</p>
+@endsection
+
+@section('content')
+    <p>This is my body content.</p>
+@endsection
+```
