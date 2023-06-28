@@ -85,7 +85,19 @@ Route::view('/Home'); // Without parameters
 Route::view('/Home', ['data' => 'value']); // With parameters
 ```
 
-- command `php artisan route:list` shows all of routes in our project.
+- Roots that just returns HTML and don't require any parameters or any extra work, you can simplify like bellow:
+
+```php
+<!-- Before -->
+Route::get('/', function() {
+    return view('home,index', [])
+})=>name('home.index');
+
+<!-- After -->
+Route::view('/', 'home.index')=>name('home.index');
+```
+
+- `php artisan route:list` Command shows all of routes in our project.
 
 ### The routing happens in three different steps
 
@@ -104,19 +116,20 @@ Laravel provides two ways of capturing the passed parameter:
 - Required parameter (can be used for ids, postNumbers, ...): You sometimes had to work with a segment(s) of your project's URL (Uniform Resource Locator). Route parameters are encapsulated within {} (curly-braces) with alphabets inside. Let us take an example where you have to capture the customer's ID or employee from the generated URL. For Example:
 
 ```php
-Route :: get ('posts/{id}', function ($id) {
-    echo 'Blog post '.$id;
+Route::get("posts/{id}", function ($id) {
+  echo "Blog post " . $id;
 });
 ```
 
 - Optional Parameter (can be useful for time when name parameter is not provided): Many parameters do not remain present within the URL, but the developers had to use them. So such parameters get indicated by a "?" (question mark sign) following the parameter's name. For Example:
 
 ```php
-Route :: get ('emp/{name?}', function ($name = 'Guest') {
-    echo $name;
+Route::get("emp/{name?}", function ($name = "Guest") {
+  echo $name;
 });
-Route :: get ('/recent-posts/{days_ago?}', function ($daysAgo = 20) { // it is necessary to have argument in optional parameters.
-return 'Posts from ' . $daysAgo .' days ago';
+Route::get("/recent-posts/{days_ago?}", function ($daysAgo = 20) {
+  // it is necessary to have argument in optional parameters.
+  return "Posts from " . $daysAgo . " days ago";
 });
 ```
 
@@ -134,7 +147,7 @@ Route :: get ('posts/{id}', function ($id) {
 
 > Note - we all know that ids are always a number. we should not always write `where(['id' => [0-9]+])`. To avoid repeating the code we do it in global, editing `app/provider/RouteServiceProvider.php` by adding repeated code as a pattern in line 49. For Example:`Route::pattern('id', '[0-9]+');`
 
-## Views
+## Views and Layouts
 
 A view is a file containing a mix of PHP code, HTML markup, and Blade templates. These templates contain placeholders for dynamic content and are used to define the structure and layout of a web page. By default, Laravel comes with a set of predefined views, such as `welcome.blade.php` and `errors/404.blade.php`.
 
@@ -162,32 +175,224 @@ For Example:
 
 ```php
 // in a Laravel controller
-return view('greeting', ['name' => 'Alex']);
+return view("greeting", ["name" => "Alex"]);
 
 // in routes/greeting.php
-Route::get('/greeting', function () {
-    return view('greeting', ['name' => 'Alex']);
+Route::get("/greeting", function () {
+  return view("greeting", ["name" => "Alex"]);
 });
 ```
 
-### Layouts
-
-a layout is a blade template that defines the basic structure of a webpage. It usually consists of HTML head and body tags and may include links to CSS and JavaScript files and other common elements such as headers, footers, and navigation menus. It can also have placeholders for dynamic content, such as the page title and main content. For Example and more Content:
+As an alternative to passing a complete array of data to the view helper function, you may use the with method to add individual pieces of data to the view.
 
 ```php
-<!-- Stored in resources/views/home.blade.php -->
+return view('greeting')
+            ->with('name', 'Victoria')
+            ->with('occupation', 'Astronaut');
+// or
+<!-- web.php -->
+Route::get('/posts/{id}', function($id){
+    $posts = [
+        1 => [
+            'title' => 'Intro To laravel',
+            'content' => 'This is a short intro to laravel'
+        ],
+        2 => [
+            'title' => 'Intro to PHP',
+            'content' => 'This is a short intro to PHP'
+        ]
+    ];
+    abort_if(!isset($posts[$id]), 404); // this is a laravel helper function - generate an error (here is 404 not found) when this condition (inputted post id is not available) is met.
+    return view('posts.show', ['post' => $posts[$id]]);
+    });
+<!-- Resources/views/posts/show.blade.php explained more in ### Layouts Usage -->
+@extends('layouts.app')
 
-@extends('layouts.app') // tells Laravel to use the app layout as the parent template.
-
-@section('title', 'Home') // define the sections that will be rendered in the layout.
-
-@section('sidebar')
-    @parent // tells Laravel to append the content to the sidebar section defined in the layout rather than replacing it.
-
-    <p>This is appended to the master sidebar.</p>
-@endsection
+@section('title', $post['title'])
 
 @section('content')
-    <p>This is my body content.</p>
+<h1>{{ $post['title'] }}</h1>
+<p>{{ $post['content'] }}</p>
 @endsection
 ```
+
+> "Dot" notation may be used to reference nested views. For example, if your view is stored at `resources/views/admin/profile.blade.php`, you may return it from one of your application's routes / controllers like so: `return view('admin.profile', $data);`
+> Note: View directory names should not contain the `.` character.
+
+### Sharing Data With All Views
+
+Occasionally, you may need to share data with all views that are rendered by your application. You may do so using the `View` facade's `share` method in `App\Providers\AppServiceProvider`.
+
+```php
+namespace App\Providers;
+
+use Illuminate\Support\Facades\View;
+
+class AppServiceProvider extends ServiceProvider
+{
+  /**
+   * Register any application services.
+   */
+  public function register(): void
+  {
+    // ...
+  }
+
+  /**
+   * Bootstrap any application services.
+   */
+  public function boot(): void
+  {
+    View::share("key", "value");
+  }
+}
+```
+
+### View Composers
+
+View composers are callbacks or class methods that are called when a view is rendered. If you have data that you want to be bound to a view each time that view is rendered, a view composer can help you organize that logic into a single location. View composers may prove particularly useful if the same view is returned by multiple routes or controllers within your application and always needs a particular piece of data.
+
+Typically, view composers will be registered within one of your application's [service providers](/docs/{{version}}/providers). In this example, we'll assume that we have created a new `App\Providers\ViewServiceProvider` to house this logic.
+
+We'll use the `View` facade's `composer` method to register the view composer. Laravel does not include a default directory for class based view composers, so you are free to organize them however you wish. For example, you could create an `app/View/Composers` directory to house all of your application's view composers:
+
+```php
+namespace App\Providers;
+
+use App\View\Composers\ProfileComposer;
+use Illuminate\Support\Facades;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
+
+class ViewServiceProvider extends ServiceProvider
+{
+  /**
+   * Register any application services.
+   */
+  public function register(): void
+  {
+    // ...
+  }
+
+  /**
+   * Bootstrap any application services.
+   */
+  public function boot(): void
+  {
+    // Using class based composers...
+    Facades\View::composer("profile", ProfileComposer::class);
+
+    // Using closure based composers...
+    Facades\View::composer("welcome", function (View $view) {
+      // ...
+    });
+
+    Facades\View::composer("dashboard", function (View $view) {
+      // ...
+    });
+  }
+}
+```
+
+### Layouts Usage
+
+while coding a site there is always a chance that we are using the same html or any frontend code over and over, layouts simplify this method using directives like `@yield`. Directives always start with an at sign like `@` followed by the directive name and optionally they can have arguments.
+
+- Yield Directive - The Yields Directive takes the name of the section it should render in the layout file, Using `@extends(`layout_file_name`)` and `@section('content')` ends with `@endsection`. Now, inside these two section directives, you can put all the HTML and content that should be rendered from.
+  > Note: Layouts are stored in the `resources/layouts`. For Example:
+
+```php
+<!-- in resources/views/layouts/app.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel App - @yield('title')</title>
+</head>
+<body>
+    <div>
+        @yield('content')
+    </div>
+</body>
+</html>
+
+<!-- in resources/views/index.blade.php or any other place we want to use `app.blade.php` as our layout -->
+@extends('layouts.app')
+
+@section('title', 'Home Page')
+
+@section('content')
+<h1>Hello World</h1>
+@endsection
+```
+
+### Conditional Rendering
+
+Sometimes our templates need some logic, for example, only if certain condition is true, you want to display some content, like is user logged in?
+
+```php
+Route::get('/posts/{id}', function($id){
+    $post = [
+        1 => [
+            'title' => 'Intro To laravel',
+            'content' => `This is a short intro to laravel`,
+            'is_new' => true
+        ],
+        2 => [
+            'title' => 'Intro to PHP',
+            'content' => 'This is a short intro to PHP',
+            'is_new' => false
+        ]
+    ];
+    abort_if(!isset($post[$id]), 404);
+    return view('posts.show', ['post' => $post[$id]]);
+    });
+
+<!-- show.blade.php to render content based on a condition, we will use the if directive. -->
+
+@extends('layouts.app')
+
+@section('title', $post['title'])
+
+@section('content')
+@if($post['is_new'])
+<div>A new blog post, using if</div>
+@elseif(!$post['is_new'])
+<div> Blog post is old</div>
+@endif
+<h1>{{ $post['title'] }}</h1>
+<p>{{ $post['content'] }}</p>
+@endsection
+```
+
+- alternatively, to use Conditional Rendering using right Directive called `@unless()` that condition has to be false and no other alternatives, then `endunless()`.
+
+```php
+<!-- in this example we use last question answered in `@unless()` condition. -->
+@unless ($post['is_new'])
+    <p>There is newer post using unless Directive</p>
+@endunless
+```
+
+- we can also add comments using `isset()` Directive like bellow:
+
+```php
+@extends('layouts.app')
+
+@section('title', $post['title'])
+
+@section('content')
+
+@unless ($post['is_new'])
+    <p>There is newer post using unless Directive</p>
+@endunless
+
+@isset($post['has_comments'])
+    <div>this post has some comments. using `isset()` directives</div>
+@endisset
+```
+
+> there are more Directives that uses further laravel knowledge that we will add later.
+
+#### loops
