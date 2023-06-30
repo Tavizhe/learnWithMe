@@ -396,3 +396,42 @@ Route::get('/posts/{id}', function($id){
 > there are more Directives that uses further laravel knowledge that we will add later.
 
 #### loops
+
+```php
+@for ($i = 0; $i < 10; $i++)
+    The current value is {{ $i }}
+@endfor
+
+@foreach ($users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+@forelse ($users as $user)
+    <li>{{ $user->name }}</li>
+@empty
+    <p>No users</p>
+@endforelse
+
+@while (true)
+    <p>I'm looping forever.</p>
+@endwhile
+```
+
+| Property           | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| `$loop->index`     | The index of the current loop iteration (starts at 0). |
+| `$loop->iteration` | The current loop iteration (starts at 1).              |
+| `$loop->remaining` | The iterations remaining in the loop.                  |
+| `$loop->count`     | The total number of items in the array being iterated. |
+| `$loop->first`     | Whether this is the first iteration through the loop.  |
+| `$loop->last`      | Whether this is the last iteration through the loop.   |
+| `$loop->even`      | Whether this is an even iteration through the loop.    |
+| `$loop->odd`       | Whether this is an odd iteration through the loop.     |
+| `$loop->depth`     | The nesting level of the current loop.                 |
+| `$loop->parent`    | When in a nested loop, the parent's loop variable.     |
+
+### Partial(sub view) Templates
+
+Blade's @include directive allows you to include a Blade view from within another view, also helps you extract parts of your templates into smaller chunks, which is easier to manage in long term.
+
+> All variables that are available to the parent view will be made available to the included view
