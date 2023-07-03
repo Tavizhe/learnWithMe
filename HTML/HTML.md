@@ -128,13 +128,13 @@ A clickable area is defined using an `<area>` element.
 
 1. rect - defines a rectangular region (he coordinates for shape="rect" come in pairs, one for the x-axis and one for the y-axis.)
    Example: the coordinates 34,44 is located 34 pixels from the left margin and 44 pixels from the top:
-   <center><img src="/Other/Html%20Images%20Reference/1.png" alt="Picture" style="align=center" /></center>
+   <center><img src="/HTML/Html%20Images%20Reference/1.png" alt="Picture" style="align=center" /></center>
 2. circle - defines a circular region (first locate the coordinates of the center of the circle: 337,300 Then specify the radius of the circle: 44 pixels)
    Example:
-    <center><img src="/Other/Html%20Images%20Reference/2.png" alt="Picture" style="align=center" /></center>
+    <center><img src="/HTML/Html%20Images%20Reference/2.png" alt="Picture" style="align=center" /></center>
 3. poly - defines a polygonal region (contains several coordinate points, which creates a shape formed with straight lines (a polygon).)
    Example:
-   <center><img src="/Other/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
+   <center><img src="/HTML/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
    So The coordinates come in pairs, one for the x-axis and one for the y-axis like:
 
    ```html
@@ -314,7 +314,7 @@ The HTML `<picture>` element allows you to display different pictures for differ
 
 A favicon image is displayed to the left of the page title in the browser tab, like this:
 
- <center><img src="/Other\Html Images Reference\img_favicon.png" alt="Favicon" style="align=center" /></center>
+ <center><img src="/HTML\Html Images Reference\img_favicon.png" alt="Favicon" style="align=center" /></center>
  Example:
 
 ```html
@@ -379,7 +379,7 @@ td {
 
 HTML tables can have different sizes for each column, row or the entire table. Use the style attribute with the width or height properties to specify the size of a table, row or column. Example:
 
-<center><img src="/Other\Html Images Reference\4.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\4.png" alt="Favicon" style="align=center" /></center>
 
 ```html
 <table style="width:100%">
@@ -405,7 +405,7 @@ HTML tables can have different sizes for each column, row or the entire table. U
 
 HTML tables can have headers for each column or row, or for many columns/rows.
 
-<center><img src="/Other\Html Images Reference\5.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\5.png" alt="Favicon" style="align=center" /></center>
 
 By default, table headers are bold and centered So To left-align the table headers, use the CSS text-align property.
 
@@ -417,7 +417,7 @@ th {
 
 - Header for Multiple Columns: use the colspan attribute on the `<th>` element.
 
-<center><img src="/Other\Html Images Reference\6.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\6.png" alt="Favicon" style="align=center" /></center>
 
 Example:
 
@@ -447,7 +447,7 @@ Example:
 
 HTML tables can adjust the padding inside the cells, and also the space between the cells.
 
-<center><img src="/Other\Html Images Reference\7.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\7.png" alt="Favicon" style="align=center" /></center>
 
 Example:
 
@@ -466,7 +466,7 @@ td {
 
 HTML tables can have cells that span over multiple rows and/or columns.
 
-<center><img src="/Other\Html Images Reference\8.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\8.png" alt="Favicon" style="align=center" /></center>
 
 - To make a cell span more than one column, use the colspan attribute.
 
@@ -511,7 +511,7 @@ HTML tables can have cells that span over multiple rows and/or columns.
 
 Zebra Stripes:
 
-<center><img src="/Other\Html Images Reference\9.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\9.png" alt="Favicon" style="align=center" /></center>
 
 ```css
 tr:nth-child(even) {
@@ -521,7 +521,7 @@ tr:nth-child(even) {
 
 Vertical Zebra Stripes:
 
-<center><img src="/Other\Html Images Reference\10.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\10.png" alt="Favicon" style="align=center" /></center>
 
 ```css
 td:nth-child(even),
@@ -534,7 +534,7 @@ _You can combine the styling from the two Examples above and you will have strip
 
 - Horizontal Dividers
 
-<center><img src="/Other\Html Images Reference\11.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\11.png" alt="Favicon" style="align=center" /></center>
 
 ```css
 tr {
@@ -544,7 +544,7 @@ tr {
 
 - Hoverable Table:
 
-<center><img src="/Other\Html Images Reference\12.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\12.png" alt="Favicon" style="align=center" /></center>
 
 ```css
 tr {
@@ -558,7 +558,7 @@ tr {
 
 The `<colgroup>` element is used to style specific columns of a table. If you want to style the two first columns of a table, use the `<colgroup>` and `<col>` elements.
 
-<center><img src="/Other\Html Images Reference\13.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\13.png" alt="Favicon" style="align=center" /></center>
 
 ```html
 <table>
@@ -584,7 +584,7 @@ The `<colgroup>` element is used to style specific columns of a table. If you wa
 
 ### HTML Lists
 
-- [Unordered HTML List](/Other/HTML.md): starts with the `<ul>` tag. Each list item starts with the `<li>`. (The list items will be marked with bullets (small black circles))
+- [Unordered HTML List](/HTML/HTML.md): starts with the `<ul>` tag. Each list item starts with the `<li>`. (The list items will be marked with bullets (small black circles))
 
 > The CSS list-style-type property is used to define the style of the list item marker. It can have one of the following values:
 >
@@ -601,7 +601,7 @@ The `<colgroup>` element is used to style specific columns of a table. If you wa
 </ul>
 ```
 
-- [Ordered HTML List](/Other/HTML.md): starts with the `<ol>` tag. Each list item starts with the `<li>` tag. (The list items will be marked with numbers)
+- [Ordered HTML List](/HTML/HTML.md): starts with the `<ol>` tag. Each list item starts with the `<li>` tag. (The list items will be marked with numbers)
 
 > The type attribute of the `<ol>` tag, defines the type of the list item marker:
 >
@@ -822,7 +822,7 @@ A responsive web design will automatically adjust for different screen sizes and
 To create a responsive website, add the following `<meta>` tag to all your web pages:
 `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 
-<center><img src="/Other\Html Images Reference\14.png" alt="Favicon" style="align=center" /></center>
+<center><img src="/HTML\Html Images Reference\14.png" alt="Favicon" style="align=center" /></center>
 
 ### Responsive Images
 
@@ -855,12 +855,12 @@ Example:
 
 normal pc or laptop view:
 
-<center><img src="/Other/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" />
+<center><img src="/HTML/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" />
 </center>
 
 in mobile view:
 
-<center><img src="/Other/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
 
 code of last Example:
 
@@ -932,7 +932,7 @@ In HTML there are some semantic elements that can be used to define different pa
 `<summary>`
 `<time>`
 
-<center><img src="/Other/Html%20Images%20Reference/17.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/17.png" alt="Picture" style="align=center" /></center>
 
 ### HTML `<section>` Element
 
@@ -1282,7 +1282,7 @@ XHTML was developed to make HTML more extensible and flexible to work with other
 
 An HTML form is used to collect user input. The user input is most often sent to a server for processing.
 
-<center><img src="/Other/Html%20Images%20Reference/18.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/18.png" alt="Picture" style="align=center" /></center>
 
 - List of All `<form>` _Attributes_
 
@@ -1359,7 +1359,7 @@ Example:
 </form>
 ```
 
-<center><img src="/Other/Html%20Images%20Reference/19.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/19.png" alt="Picture" style="align=center" /></center>
 
 ### Checkboxes
 
@@ -1377,7 +1377,7 @@ Example:
 </form>
 ```
 
-<center><img src="/Other/Html%20Images%20Reference/20.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/20.png" alt="Picture" style="align=center" /></center>
 
 ### The Submit Button
 
@@ -1399,7 +1399,7 @@ Example:
 
 - Notice that each input field must have a name attribute to be submitted. If the name attribute is omitted, the value of the input field will not be sent at all.
 
-<center><img src="/Other/Html%20Images%20Reference/21.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/21.png" alt="Picture" style="align=center" /></center>
 
 ### The **action** attribute
 
@@ -1515,7 +1515,7 @@ The cols attribute specifies the visible width of a text area.
 </form>
 ```
 
-<center><img src="/Other/Html%20Images%20Reference/22.png" alt="Picture" style="align=center" /></center>
+<center><img src="/HTML/Html%20Images%20Reference/22.png" alt="Picture" style="align=center" /></center>
 
 - `<datalist>`, `list` - specifies a list of pre-defined options for an `<input>` element. Users will see a drop-down list of the pre-defined options as they input data. The **list** attribute of the `<input>` element, must refer to the **id** attribute of the `<datalist>` element.
 

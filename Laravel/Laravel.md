@@ -247,7 +247,8 @@ class AppServiceProvider extends ServiceProvider
   }
 }
 ```
-<!-- 
+
+<!--
 ### View Composers
 
 View composers are callbacks or class methods that are called when a view is rendered. If you have data that you want to be bound to a view each time that view is rendered, a view composer can help you organize that logic into a single location. View composers may prove particularly useful if the same view is returned by multiple routes or controllers within your application and always needs a particular piece of data.
@@ -435,3 +436,125 @@ Route::get('/posts/{id}', function($id){
 Blade's @include directive allows you to include a Blade view from within another view, also helps you extract parts of your templates into smaller chunks, which is easier to manage in long term.
 
 > All variables that are available to the parent view will be made available to the included view
+
+## Requests & Response
+
+Laravel has ways to build our proper HTTP response with all its features like response codes, setting cookies and setting response headers. Check Example bellow:
+
+```php
+Route::get("/fun/responses", function () use ($posts) {
+  return response($posts, 201)
+    ->header("Content-Type", "application/json")
+    ->cookie("MY_COOKIE", "Fard", 3600);
+});
+```
+
+the response function will create a new response object. This object has methods like header or cookie.
+
+- The response function accepts the Three parameters, all optional, first is the content to return, Second, the status code and third is an array of response headers.
+
+So posts will be a content and 201 in our response code. The Header method sets the response header like contents type, telling the browser what to expect from their content, whether it is HTML or JSON. Cookie sets the browser cookies. Cookies are useful to keep users specific data on the browser side. we can render blade views while adding headers cookies and changing the status code.
+
+### Redirect Responses
+
+Sometimes the route needs to do something and then go to another page. For example:
+
+```php
+Route::get("/fun/redirect", function () {
+  return redirect("/contact");
+});
+```
+
+The `back` helper function will redirect to the last address. It's useful with one time actions like for input storying. For example:
+
+```php
+Route::get("/fun/back", function () {
+  return back();
+});
+```
+
+Sometimes you need to return only the data from the response without any HTML and in such cases most of the time you wanted in the Json format. For example:
+
+```php
+Route::get("/fun/json", function () use ($posts) {
+  return response()->json($posts);
+});
+```
+
+It's easy to force the browser to download a file, using the download method of the response object.
+
+```php
+Route::get("/fun/download", function () {
+  return response()->download(
+    public_path("/chingcho Chang.jpg"),
+    "ChingChoChang.jpg"
+  );
+});
+```
+
+### Group Routes
+
+Group Routes can have the same prefix, the same roots, name prefix or the same middleware applied.
+
+```php
+Route::prefix("/fun")
+  ->name("fun.")
+  ->group(function () use ($posts) {
+    // Testing Requests & Response
+    Route::get("responses", function () use ($posts) {
+      return response($posts, 201)
+        ->header("Content-Type", "application/json")
+        ->cookie("MY_COOKIE", "Fard", 3600);
+    })->name("responses");
+    Route::get("redirect", function () {
+      return redirect("/contact");
+    })->name("redirect");
+    Route::get("back", function () {
+      return back();
+    })->name("back");
+    Route::get("named-route", function () {
+      return redirect()->route("posts.show", ["id" => 1]);
+    })->name("named-route");
+    Route::get("away", function () {
+      return redirect()->away("https://google.com");
+    })->name("away");
+    Route::get("json", function () use ($posts) {
+      return response()->json($posts);
+    })->name("json");
+    Route::get("download", function () {
+      return response()->download(
+        public_path("/chingcho Chang.jpg"),
+        "ChingChoChang.jpg"
+      );
+    })->name("download");
+  });
+```
+
+### Request Input
+
+Apart from the root parameters, we can accept input as the Query parameters data sent through an HTML form or request body interface and `Json` format. This Input is accessible using the request object methods. There are two ways
+
+- using the request function `request()`.
+- by type printing argument with the request `function(Request $request)`.
+
+> Make sure to use `use Illuminate\Http\Request;`
+
+#### `request()->all()` Method
+
+The `all()` method will give us access to all the inputs (as an array), but not the actual route parameters.
+for example:
+
+let's Try adding some query parameters like page and limit, often used as results`127.0.0.1:8000/posts?limit=10&page=5`. In order to see the results we use `dd()` function.
+
+- `dd()` can be used to dump data.
+
+```php
+Route::get("/posts", function () use ($posts) {
+  dd(request()->all());
+  return view("posts.index", ["posts" => $posts]);
+});
+```
+
+we can also use `dd(request()->input('page', 1));` to allows us to specify a default value to ask the second parameter. there is a special query method if you want to get the value only from a query parameter `dd((int)request()->query('page', 1));`. works the same as the input method does. input will look for the names in all the possible input. Sources like Query Parameters, a form or Jason and query.
+
+### Middleware

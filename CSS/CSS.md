@@ -71,7 +71,7 @@ Classification Properties:
 
 ## CSS Syntax
 
-<center><img src="/Other/css%20Images%20Reference/1.png" alt="Picture" style="align=center" /></center>
+<center><img src="/CSS/css%20Images%20Reference/1.png" alt="Picture" style="align=center" /></center>
 
 - The selector - points to the ==HTML element== you want to style.
 - The declaration block - contains one or more declarations separated by semicolons. Each includes a CSS property name and a value, separated by a colon.
@@ -119,7 +119,7 @@ Example `/* This is a single-line comment */ p { color: red;}`.
 Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values. In CSS, a color can be specified by using a predefined color name:
 CSS/HTML support [140 standard color names.!](https://www.w3schools.com/colors/colors_names.asp).
 
-<center><img src="/Other/css%20Images%20Reference/2.png" alt="Picture" style="align=center" /></center>
+<center><img src="/CSS/css%20Images%20Reference/2.png" alt="Picture" style="align=center" /></center>
 
 - CSS Background Color (`background-color`) - will be coded like this Example : `<h1 style="background-color:DodgerBlue;">Hello World</h1>`
 - CSS Text Color (`color`) - will be coded like this Example : `<h1 style="color:Tomato;">Hello World</h1>`
@@ -164,7 +164,7 @@ p.mix {
 
 Result:
 
-<center><img src="/Other/css%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
+<center><img src="/CSS/css%20Images%20Reference/3.png" alt="Picture" style="align=center" /></center>
 
 - The `border-color` property - is used to set the color of the four borders.
   > The `border` property is a shorthand property for the following individual border properties: `border-width, border-style, border-color`
