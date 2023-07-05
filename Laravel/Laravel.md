@@ -558,3 +558,143 @@ Route::get("/posts", function () use ($posts) {
 we can also use `dd(request()->input('page', 1));` to allows us to specify a default value to ask the second parameter. there is a special query method if you want to get the value only from a query parameter `dd((int)request()->query('page', 1));`. works the same as the input method does. input will look for the names in all the possible input. Sources like Query Parameters, a form or Jason and query.
 
 ### Middleware
+
+Middleware is a mechanism that filter requests going through your application.
+
+![Request flow with middleware](Laravel%20Images%20Reference/3.png)
+
+An example BEFORE middleware
+
+```php
+namespace App\Http\Middleware;
+use Closure;
+
+class BeforeMiddleware
+{
+  public function handle($request, Closure $next)
+  {
+    // Do something here before the request is handled by Controller/Closure...
+
+    // Calling $next with $request parameter
+    return $next($request);
+  }
+}
+```
+
+An example AFTER middleware
+
+```php
+namespace App\Http\Middleware;
+use Closure;
+
+class AfterMiddleware
+{
+  public function handle($request, Closure $next)
+  {
+    // Calling $next with $request parameter
+    $response = $next($request);
+
+    // Do something here after the request is handled by Controller/Closure
+    return $response;
+  }
+}
+```
+
+Middleware should call the passed `Closure` `$next` with the `$request` parameter to allow further processing, or `throw` an `Exception` or do a redirect to stop further processing of the `Request`.
+
+Middleware examples:
+
+- Authentication (verifying if user is authenticated)
+- CSRF protection
+- CORS middleware
+
+![Middleware](Laravel%20Images%20Reference/4.png)
+
+One of the Route object methods is middleware. we can apply to a group of routes or a specific route. in `kernel.php` file there is `$routeMiddleware` and inside it defines a thing called Elias, Now using this, you can easily apply middleware using the middleware method and passing those. Like below:
+
+```php
+Route::get("/posts/{id}", function ($id) use ($posts) {
+  abort_if(!isset($posts[$id]), 404);
+
+  return view("posts.show", ["post" => $posts[$id]]);
+})
+  ->name("posts.show")
+  ->middleware("auth"); //the user needs to be authenticated to visit this route.
+```
+
+## Controllers
+
+Controllers are an alternative to Closures for defining the application logic
+
+![Controllers](Laravel%20Images%20Reference/5.png)
+
+- To Generating a new Controller `php artisan make:controller ControllerNameController`.
+
+> Controllers are stored inside the `app/Http/Controllers` folder.
+
+An example controller class
+
+```php
+<!-- In Controller -->
+namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+
+class HomeController extends Controller
+{
+  public function index()
+  {
+    return view("home");
+  }
+
+  public function contact()
+  {
+    return view("contact");
+  }
+}
+
+<!-- In Routes -->
+Route::get("/", "HomeController@home");
+// or
+Route::get('/', [HomeController::class, 'home'])->name('home.index');
+
+Route::get("/contact", "HomeController@contact");
+//or
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+```
+
+We don't have to specify the full controller namespace in `web.php`. It's enough to specify everything after `App\Http\Controllers`. RouteServiceProvider will is responsible for prepending the `App\Http\Controllers` namespace to controller names in routes.
+
+### Single Action Controllers
+
+For controllers that handle just a single action:
+
+- `php artisan make:controller HomeSingleController --invokable`
+
+```php
+<!-- In Controller -->
+namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+
+class HomeSingleController extends Controller
+{
+  public function __invoke()
+  {
+    return view("home");
+  }
+}
+
+<!-- In Routes -->
+Route::get("home", "HomeSingleController");
+// or
+Route::get('/single', HomeSingleController::class);
+
+```
+
+The `__invoke` is a magic PHP method that allows the object to be called like a function, eg.
+
+```php
+$controller = new HomeSingleController();
+$controller();
+```
+
+![Controller](Laravel%20Images%20Reference/5.png)
