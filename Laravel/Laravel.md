@@ -511,6 +511,11 @@ Apart from the root parameters, we can accept input as the Query parameters data
 
 - using the request function `request()`.
 - by type printing argument with the request `function(Request $request)`.
+- later we can change logo by navigating to `resources/views/components/application-logo.blade.php`.
+
+```php
+<img src="{{ asset('logo/logoName.png') }}" width="100px">
+```
 
 > Make sure to use `use Illuminate\Http\Request;`
 
@@ -616,6 +621,11 @@ npm install
 npm run dev
 php artisan migrate #remember to make a database before using this code
 ```
+
+- now we can add `{{ Auth::user()->name }}` in view that we want.
+- it will be useful to add to users model `implements MustVerifyEmail` for email verification. this will force user to verify email first before using his/her account.
+
+> Note: we can make email for our site via mailtrap.io.
 
 ## Controllers
 
@@ -907,8 +917,7 @@ User::factory()->count(5)->create();
 User::where('id;','>=', 2)->orderBy('id', 'desc')->get();
 # shows model by desc id
 ```
-
-## Introduction to Database: Query Builder documentation from laravel.com
+<!-- ## Introduction to Database: Query Builder documentation from laravel.com
 
 The Laravel query builder protects your application against SQL injection attacks.
 
@@ -1427,21 +1436,38 @@ $users = DB::table("users")
 When chaining together calls to the query builder's `where` method, the "where" clauses will be joined together using the `and` operator. However, you may use the `orWhere` method to join a clause to the query using the `or` operator. The `orWhere` method accepts the same arguments as the `where` method:
 
 ```php
+// Retrieve the "users" table from the database using the DB facade
 $users = DB::table("users")
+
+  // Filter the result to include only users with "votes" count greater than 100
   ->where("votes", ">", 100)
+
+  // Alternatively, include users with the name "John"
   ->orWhere("name", "John")
+
+  // Get all the matching records
   ->get();
+
 ```
 
 If you need to group an "or" condition within parentheses, you may pass a closure as the first argument to the `orWhere` method:
 
 ```php
+// Retrieve the "users" table from the database using the DB facade
 $users = DB::table("users")
+
+  // Filter the result to include only users with "votes" count greater than 100
   ->where("votes", ">", 100)
+
+  // Alternatively, include users with both the name "Abigail" and 
+  // a vote count greater than 50 by using a nested query
   ->orWhere(function (Builder $query) {
     $query->where("name", "Abigail")->where("votes", ">", 50);
   })
+
+  // Get all the matching records
   ->get();
+
 ```
 
 The example above will produce the following SQL:
@@ -1467,27 +1493,28 @@ $products = DB::table("products")
 
 ### JSON Where Clauses
 
-Laravel also supports querying JSON column types on databases that provide support for JSON column types. Currently, this includes MySQL 5.7+, PostgreSQL, SQL Server 2016, and SQLite 3.39.0 (with the [JSON1 extension](https://www.sqlite.org/json1.html)). To query a JSON column, use the `->` operator:
+Laravel also supports querying JSON column types on databases that provide support for JSON column types. Currently, this includes MySQL 5.7+, PostgreSQL, SQL Server 2016, and SQLite 3.39.0. To query a JSON column, use the `->` operator:
 
 ```php
+// Query the "users" table from the database
 $users = DB::table("users")
+  // Filter the users based on a condition
   ->where("preferences->dining->meal", "salad")
+  // Retrieve the results of the query
   ->get();
+
 ```
 
 You may use `whereJsonContains` to query JSON arrays. This feature is not supported by SQLite database versions less than 3.38.0:
 
 ```php
+// Query the "users" table from the database
 $users = DB::table("users")
+  // Filter the users based on a condition using whereJsonContains method
   ->whereJsonContains("options->languages", "en")
-  ->get();
-```
-
-If your application uses the MySQL or PostgreSQL databases, you may pass an array of values to the `whereJsonContains` method:
-
-```php
-$users = DB::table("users")
-  ->whereJsonContains("options->languages", ["en", "de"])
+  /* or */
+  ->whereJsonContains("options->languages", ["en", "de"]) //in the MySQL or PostgreSQL databases
+  // Retrieve the results of the query
   ->get();
 ```
 
@@ -1530,11 +1557,14 @@ whereBetweenColumns / whereNotBetweenColumns / orWhereBetweenColumns / orWhereNo
 The `whereBetweenColumns` method verifies that a column's value is between the two values of two columns in the same table row:
 
 ```php
+// Query the "patients" table from the database
 $patients = DB::table("patients")
+  // Filter the patients based on a range between two columns
   ->whereBetweenColumns("weight", [
     "minimum_allowed_weight",
     "maximum_allowed_weight",
   ])
+  // Retrieve the results of the query
   ->get();
 ```
 
@@ -1664,29 +1694,35 @@ $users = DB::table("users")
 
 You may also pass a comparison operator to the `whereColumn` method:
 
-    $users = DB::table('users')
-                    ->whereColumn('updated_at', '>', 'created_at')
-                    ->get();
+```php
+$users = DB::table('users')
+  ->whereColumn('updated_at', '>', 'created_at')
+  ->get();
+```
 
 You may also pass an array of column comparisons to the `whereColumn` method. These conditions will be joined using the `and` operator:
 
-    $users = DB::table('users')
-                    ->whereColumn([
-                        ['first_name', '=', 'last_name'],
-                        ['updated_at', '>', 'created_at'],
-                    ])->get();
+```php
+$users = DB::table('users')
+  ->whereColumn('first_name', '=', 'last_name')
+  ->where('updated_at', '>', 'created_at')
+  ->get();
+`
+```
 
 ### Logical Grouping
 
 Sometimes you may need to group several "where" clauses within parentheses in order to achieve your query's desired logical grouping. In fact, you should generally always group calls to the `orWhere` method in parentheses in order to avoid unexpected query behavior. To accomplish this, you may pass a closure to the `where` method:
 
-    $users = DB::table('users')
-               ->where('name', '=', 'John')
-               ->where(function (Builder $query) {
-                   $query->where('votes', '>', 100)
-                         ->orWhere('title', '=', 'Admin');
-               })
-               ->get();
+```php
+$users = DB::table('users')
+    ->where('name', '=', 'John')
+    ->where(function (Builder $query) {
+        $query->where('votes', '>', 100)
+            ->orWhere('title', '=', 'Admin');
+    })
+    ->get();
+```
 
 As you can see, passing a closure into the `where` method instructs the query builder to begin a constraint group. The closure will receive a query builder instance which you can use to set the constraints that should be contained within the parenthesis group. The example above will produce the following SQL:
 
@@ -1697,77 +1733,7 @@ select * from users where name = 'John' and (votes > 100 or title = 'Admin')
 > **Warning**
 > You should always group `orWhere` calls in order to avoid unexpected behavior when global scopes are applied.
 
-### Advanced Where Clauses
-
-### Where Exists Clauses
-
-The `whereExists` method allows you to write "where exists" SQL clauses. The `whereExists` method accepts a closure which will receive a query builder instance, allowing you to define the query that should be placed inside of the "exists" clause:
-
-    $users = DB::table('users')
-               ->whereExists(function (Builder $query) {
-                   $query->select(DB::raw(1))
-                         ->from('orders')
-                         ->whereColumn('orders.user_id', 'users.id');
-               })
-               ->get();
-
-Alternatively, you may provide a query object to the `whereExists` method instead of a closure:
-
-    $orders = DB::table('orders')
-                    ->select(DB::raw(1))
-                    ->whereColumn('orders.user_id', 'users.id');
-
-    $users = DB::table('users')
-                        ->whereExists($orders)
-                        ->get();
-
-Both of the examples above will produce the following SQL:
-
-```sql
-select * from users
-where exists (
-    select 1
-    from orders
-    where orders.user_id = users.id
-)
-```
-
-### Subquery Where Clauses
-
-Sometimes you may need to construct a "where" clause that compares the results of a subquery to a given value. You may accomplish this by passing a closure and a value to the `where` method. For example, the following query will retrieve all users who have a recent "membership" of a given type;
-
-    use App\Models\User;
-    use Illuminate\Database\Query\Builder;
-
-    $users = User::where(function (Builder $query) {
-        $query->select('type')
-            ->from('membership')
-            ->whereColumn('membership.user_id', 'users.id')
-            ->orderByDesc('membership.start_date')
-            ->limit(1);
-    }, 'Pro')->get();
-
-Or, you may need to construct a "where" clause that compares a column to the results of a subquery. You may accomplish this by passing a column, operator, and closure to the `where` method. For example, the following query will retrieve all income records where the amount is less than average;
-
-    use App\Models\Income;
-    use Illuminate\Database\Query\Builder;
-
-    $incomes = Income::where('amount', '<', function (Builder $query) {
-        $query->selectRaw('avg(i.amount)')->from('incomes as i');
-    })->get();
-
-### Full Text Where Clauses
-
-> **Warning**
-> Full text where clauses are currently supported by MySQL and PostgreSQL.
-
-The `whereFullText` and `orWhereFullText` methods may be used to add full text "where" clauses to a query for columns that have [full text indexes](/docs/{{version}}/migrations#available-index-types). These methods will be transformed into the appropriate SQL for the underlying database system by Laravel. For example, a `MATCH AGAINST` clause will be generated for applications utilizing MySQL:
-
-    $users = DB::table('users')
-               ->whereFullText('bio', 'web developer')
-               ->get();
-
-## Ordering, Grouping, Limit & Offset
+## Ordering, Grouping, Limit & Offset in DB
 
 ### Ordering
 
@@ -1775,46 +1741,52 @@ The `whereFullText` and `orWhereFullText` methods may be used to add full text "
 
 The `orderBy` method allows you to sort the results of the query by a given column. The first argument accepted by the `orderBy` method should be the column you wish to sort by, while the second argument determines the direction of the sort and may be either `asc` or `desc`:
 
-    $users = DB::table('users')
-                    ->orderBy('name', 'desc')
-                    ->get();
+```php
+$users = DB::table('users')
+            ->orderBy('name', 'desc')
+            ->get();
+            
+# To sort by multiple columns
+$users = DB::table('users')
+    ->orderByDesc('name')
+    ->orderBy('email')
+    ->get();
 
-To sort by multiple columns, you may simply invoke `orderBy` as many times as necessary:
-
-    $users = DB::table('users')
-                    ->orderBy('name', 'desc')
-                    ->orderBy('email', 'asc')
-                    ->get();
+```
 
 #### The `latest` & `oldest` Methods
 
 The `latest` and `oldest` methods allow you to easily order results by date. By default, the result will be ordered by the table's `created_at` column. Or, you may pass the column name that you wish to sort by:
 
-    $user = DB::table('users')
-                    ->latest()
-                    ->first();
+```php
+$user = DB::table('users')
+         ->orderBy('created_at', 'desc')
+         ->first();
+
+```
 
 #### Random Ordering
 
 The `inRandomOrder` method may be used to sort the query results randomly. For example, you may use this method to fetch a random user:
 
-    $randomUser = DB::table('users')
-                    ->inRandomOrder()
-                    ->first();
+```php
+$randomUser = DB::table('users')
+                  ->inRandomOrder()
+                  ->first();
+```
 
 #### Removing Existing Orderings
 
 The `reorder` method removes all of the "order by" clauses that have previously been applied to the query:
 
-    $query = DB::table('users')->orderBy('name');
+```php
+$query = DB::table('users')->orderBy('name');
+$unorderedUsers = $query->reorder()->get();
 
-    $unorderedUsers = $query->reorder()->get();
-
-You may pass a column and direction when calling the `reorder` method in order to remove all existing "order by" clauses and apply an entirely new order to the query:
-
-    $query = DB::table('users')->orderBy('name');
-
-    $usersOrderedByEmail = $query->reorder('email', 'desc')->get();
+#You may pass a column and direction when calling the `reorder` method in order to remove all existing "order by" for new one
+$query = DB::table('users')->orderBy('name');
+$usersOrderedByEmail = $query->reorder('email', 'desc')->get();
+```
 
 ### Grouping
 
@@ -1822,27 +1794,19 @@ You may pass a column and direction when calling the `reorder` method in order t
 
 As you might expect, the `groupBy` and `having` methods may be used to group the query results. The `having` method's signature is similar to that of the `where` method:
 
-    $users = DB::table('users')
-                    ->groupBy('account_id')
-                    ->having('account_id', '>', 100)
-                    ->get();
-
-You can use the `havingBetween` method to filter the results within a given range:
-
-    $report = DB::table('orders')
+```php
+$users = DB::table('users')
+              ->groupBy('account_id', 'status')
+              ->having('account_id', '>', 100)
+              ->get();
+              
+#`havingBetween` method to filter the results within a given range:
+$report = DB::table('orders')
                     ->selectRaw('count(id) as number_of_orders, customer_id')
                     ->groupBy('customer_id')
                     ->havingBetween('number_of_orders', [5, 15])
                     ->get();
-
-You may pass multiple arguments to the `groupBy` method to group by multiple columns:
-
-    $users = DB::table('users')
-                    ->groupBy('first_name', 'status')
-                    ->having('account_id', '>', 100)
-                    ->get();
-
-To build more advanced `having` statements, see the [`havingRaw`](#raw-methods) method.
+```
 
 ### Limit & Offset
 
@@ -1850,79 +1814,103 @@ To build more advanced `having` statements, see the [`havingRaw`](#raw-methods) 
 
 You may use the `skip` and `take` methods to limit the number of results returned from the query or to skip a given number of results in the query:
 
-    $users = DB::table('users')->skip(10)->take(5)->get();
+```php
+# Fetching data from the 'users' table in the database
+$users = DB::table('users')
 
-Alternatively, you may use the `limit` and `offset` methods. These methods are functionally equivalent to the `take` and `skip` methods, respectively:
+# Skipping the first 10 rows of data 
+->skip(10)
 
-    $users = DB::table('users')
-                    ->offset(10)
-                    ->limit(5)
-                    ->get();
+# Taking only the next 5 rows of data 
+->take(5)
 
-## Conditional Clauses
+# Retrieving the selected data from the table
+->get();
+
+# alternatives
+$users = DB::table('users')
+            ->offset(10)
+            ->limit(5)
+            ->get();
+```
+
+## Conditional Clauses in DB
 
 Sometimes you may want certain query clauses to apply to a query based on another condition. For instance, you may only want to apply a `where` statement if a given input value is present on the incoming HTTP request. You may accomplish this using the `when` method:
 
-    $role = $request->string('role');
+```php
+# Retrieving the value of the 'role' parameter from the HTTP request 
+$role = $request->string('role');
 
-    $users = DB::table('users')
-                    ->when($role, function (Builder $query, string $role) {
-                        $query->where('role_id', $role);
-                    })
-                    ->get();
+# Fetching data from the 'users' table in the database 
+$users = DB::table('users')
+
+    # Conditionally applying a filter to the query based on the value of the 'role' parameter
+    ->when($role, function ($query) use ($role) {
+        #Filtering the query to only include rows with a matching 'role_id'
+        $query->where('role_id', $role);
+    })
+    
+    # Retrieving the selected data from the table
+    ->get();
+
+```
 
 The `when` method only executes the given closure when the first argument is `true`. If the first argument is `false`, the closure will not be executed. So, in the example above, the closure given to the `when` method will only be invoked if the `role` field is present on the incoming request and evaluates to `true`.
 
 You may pass another closure as the third argument to the `when` method. This closure will only execute if the first argument evaluates as `false`. To illustrate how this feature may be used, we will use it to configure the default ordering of a query:
 
-    $sortByVotes = $request->boolean('sort_by_votes');
+```php
+$sort_by_votes = $request->boolean('sort_by_votes');
 
-    $users = DB::table('users')
-                    ->when($sortByVotes, function (Builder $query, bool $sortByVotes) {
-                        $query->orderBy('votes');
-                    }, function (Builder $query) {
-                        $query->orderBy('name');
-                    })
-                    ->get();
+$users = DB::table('users')
+    ->when($sort_by_votes, function (Builder $query) {
+        $query->orderBy('votes');
+    }, function (Builder $query) {
+        $query->orderBy('name');
+    })
+    ->get();
+```
 
-## Insert Statements
+## Insert Statements DB
 
 The query builder also provides an `insert` method that may be used to insert records into the database table. The `insert` method accepts an array of column names and values:
 
-    DB::table('users')->insert([
-        'email' => 'kayla@example.com',
-        'votes' => 0
-    ]);
-
-You may insert several records at once by passing an array of arrays. Each array represents a record that should be inserted into the table:
-
-    DB::table('users')->insert([
+```php
+DB::table('users')->insert([
         ['email' => 'picard@example.com', 'votes' => 0],
         ['email' => 'janeway@example.com', 'votes' => 0],
     ]);
+```
 
-The `insertOrIgnore` method will ignore errors while inserting records into the database. When using this method, you should be aware that duplicate record errors will be ignored and other types of errors may also be ignored depending on the database engine. For example, `insertOrIgnore` will [bypass MySQL's strict mode](https://dev.mysql.com/doc/refman/en/sql-mode.html#ignore-effect-on-execution):
+The `insertOrIgnore` method will ignore **errors while inserting records into the database**. When using this method, you should be aware that duplicate record errors will be ignored and other types of errors may also be ignored depending on the database engine. For example, `insertOrIgnore` will bypass MySQL's strict mode:
 
-    DB::table('users')->insertOrIgnore([
+```php
+DB::table('users')->insertOrIgnore([
         ['id' => 1, 'email' => 'sisko@example.com'],
         ['id' => 2, 'email' => 'archer@example.com'],
     ]);
+```
 
 The `insertUsing` method will insert new records into the table while using a subquery to determine the data that should be inserted:
 
-    DB::table('pruned_users')->insertUsing([
+```php
+DB::table('pruned_users')->insertUsing([
         'id', 'name', 'email', 'email_verified_at'
     ], DB::table('users')->select(
         'id', 'name', 'email', 'email_verified_at'
     )->where('updated_at', '<=', now()->subMonth()));
+```
 
-#### Auto-Incrementing IDs
+### Auto-Incrementing IDs
 
 If the table has an auto-incrementing id, use the `insertGetId` method to insert a record and then retrieve the ID:
 
-    $id = DB::table('users')->insertGetId(
+```php
+$id = DB::table('users')->insertGetId(
         ['email' => 'john@example.com', 'votes' => 0]
     );
+```
 
 > **Warning**
 > When using PostgreSQL the `insertGetId` method expects the auto-incrementing column to be named `id`. If you would like to retrieve the ID from a different "sequence", you may pass the column name as the second parameter to the `insertGetId` method.
@@ -1931,7 +1919,8 @@ If the table has an auto-incrementing id, use the `insertGetId` method to insert
 
 The `upsert` method will insert records that do not exist and update the records that already exist with new values that you may specify. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of columns that should be updated if a matching record already exists in the database:
 
-    DB::table('flights')->upsert(
+```php
+DB::table('flights')->upsert(
         [
             ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
             ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
@@ -1939,104 +1928,126 @@ The `upsert` method will insert records that do not exist and update the records
         ['departure', 'destination'],
         ['price']
     );
+```
 
 In the example above, Laravel will attempt to insert two records. If a record already exists with the same `departure` and `destination` column values, Laravel will update that record's `price` column.
 
 > **Warning**
 > All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index. In addition, the MySQL database driver ignores the second argument of the `upsert` method and always uses the "primary" and "unique" indexes of the table to detect existing records.
 
-## Update Statements
+## Update Statements in DB
 
 In addition to inserting records into the database, the query builder can also update existing records using the `update` method. The `update` method, like the `insert` method, accepts an array of column and value pairs indicating the columns to be updated. The `update` method returns the number of affected rows. You may constrain the `update` query using `where` clauses:
 
-    $affected = DB::table('users')
+```php
+$affected = DB::table('users')
                   ->where('id', 1)
                   ->update(['votes' => 1]);
+```
 
-#### Update Or Insert
+### Update Or Insert
 
 Sometimes you may want to update an existing record in the database or create it if no matching record exists. In this scenario, the `updateOrInsert` method may be used. The `updateOrInsert` method accepts two arguments: an array of conditions by which to find the record, and an array of column and value pairs indicating the columns to be updated.
 
 The `updateOrInsert` method will attempt to locate a matching database record using the first argument's column and value pairs. If the record exists, it will be updated with the values in the second argument. If the record can not be found, a new record will be inserted with the merged attributes of both arguments:
 
-    DB::table('users')
+```php
+DB::table('users')
         ->updateOrInsert(
             ['email' => 'john@example.com', 'name' => 'John'],
             ['votes' => '2']
         );
+```
 
 ### Updating JSON Columns
 
 When updating a JSON column, you should use `->` syntax to update the appropriate key in the JSON object. This operation is supported on MySQL 5.7+ and PostgreSQL 9.5+:
 
-    $affected = DB::table('users')
+```php
+$affected = DB::table('users')
                   ->where('id', 1)
                   ->update(['options->enabled' => true]);
+```
 
 ### Increment & Decrement
 
 The query builder also provides convenient methods for incrementing or decrementing the value of a given column. Both of these methods accept at least one argument: the column to modify. A second argument may be provided to specify the amount by which the column should be incremented or decremented:
 
-    DB::table('users')->increment('votes');
+```php
+DB::table('users')->increment('votes');
 
-    DB::table('users')->increment('votes', 5);
+DB::table('users')->increment('votes', 5);
 
-    DB::table('users')->decrement('votes');
+DB::table('users')->decrement('votes');
 
-    DB::table('users')->decrement('votes', 5);
+DB::table('users')->decrement('votes', 5);
+```
 
 If needed, you may also specify additional columns to update during the increment or decrement operation:
 
-    DB::table('users')->increment('votes', 1, ['name' => 'John']);
+```php
+DB::table('users')->increment('votes', 1, ['name' => 'John']);
 
-In addition, you may increment or decrement multiple columns at once using the `incrementEach` and `decrementEach` methods:
-
-    DB::table('users')->incrementEach([
+#  using the `incrementEach` and `decrementEach` methods:
+DB::table('users')->incrementEach([
         'votes' => 5,
         'balance' => 100,
     ]);
+```
 
-## Delete Statements
+## Delete Statements in DB
 
 The query builder's `delete` method may be used to delete records from the table. The `delete` method returns the number of affected rows. You may constrain `delete` statements by adding "where" clauses before calling the `delete` method:
 
-    $deleted = DB::table('users')->delete();
+```php
+$deleted = DB::table('users')->delete();
 
-    $deleted = DB::table('users')->where('votes', '>', 100)->delete();
+$deleted = DB::table('users')->where('votes', '>', 100)->delete();
+```
 
 If you wish to truncate an entire table, which will remove all records from the table and reset the auto-incrementing ID to zero, you may use the `truncate` method:
 
-    DB::table('users')->truncate();
+```php
+DB::table('users')->truncate();
+```
 
-#### Table Truncation & PostgreSQL
-
-When truncating a PostgreSQL database, the `CASCADE` behavior will be applied. This means that all foreign key related records in other tables will be deleted as well.
-
-## Pessimistic Locking
+## Pessimistic Locking in DB
 
 The query builder also includes a few functions to help you achieve "pessimistic locking" when executing your `select` statements. To execute a statement with a "shared lock", you may call the `sharedLock` method. A shared lock prevents the selected rows from being modified until your transaction is committed:
 
-    DB::table('users')
-            ->where('votes', '>', 100)
-            ->sharedLock()
-            ->get();
+```php
+# Fetching records from the 'users' table in the database
+DB::table('users')
+    # Adding a condition to only retrieve rows where the 'votes' column value is greater than 100
+    ->where('votes', '>', 100)
+    
+    # Applying a shared lock to the query, preventing other processes from modifying the selected rows until the transaction completes
+    ->sharedLock()
+    
+    # Executing the query and returning the results as a collection of records
+    ->get();
+
+```
 
 Alternatively, you may use the `lockForUpdate` method. A "for update" lock prevents the selected records from being modified or from being selected with another shared lock:
 
-    DB::table('users')
+```php
+DB::table('users')
             ->where('votes', '>', 100)
             ->lockForUpdate()
             ->get();
+```
 
-## Debugging
+## Debugging in DB
 
 You may use the `dd` and `dump` methods while building a query to dump the current query bindings and SQL. The `dd` method will display the debug information and then stop executing the request. The `dump` method will display the debug information but allow the request to continue executing:
 
-    DB::table('users')->where('votes', '>', 100)->dd();
+```php
+DB::table('users')->where('votes', '>', 100)->dd();
 
-    DB::table('users')->where('votes', '>', 100)->dump();
-
-End Of Huge Mess -->
+DB::table('users')->where('votes', '>', 100)->dump();
+```
+-->
 
 ## Forms (Markup, CSRF, Validation, Errors, Flash Messages, Mass Assignment)
 
