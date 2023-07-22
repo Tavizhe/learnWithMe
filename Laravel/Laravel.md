@@ -597,6 +597,26 @@ Route::get("/posts/{id}", function ($id) use ($posts) {
   ->middleware("auth"); //the user needs to be authenticated to visit this route.
 ```
 
+#### Creating a middleware
+
+we can use `php artisan make:middleware middlewareName` for like ensureTokenIsValid. Next we need to add it in `app\Http\Kernel.php` at `$routeMiddleware` like `'ensureTokenIsValid' => \App\Http\Middleware\ensureTokenIsValid::class`. when we want to use this middleware in a route use this code:
+
+```php
+Route::get('/about', 'index')->name('about.page')->middleware('ensureTokenIsValid');
+```
+
+### laravel Breeze middleware
+
+breeze is laravel default authentication system. in order to install it use `composer require laravel/breeze --dev` next run following code
+
+```shell
+php artisan breeze:install
+
+npm install
+npm run dev
+php artisan migrate #remember to make a database before using this code
+```
+
 ## Controllers
 
 Controllers are an alternative to Closures for defining the application logic
@@ -890,9 +910,9 @@ User::where('id;','>=', 2)->orderBy('id', 'desc')->get();
 
 ## Introduction to Database: Query Builder documentation from laravel.com
 
-It can be used to perform most database operations in your application and works perfectly with all of Laravel's supported database systems.
+The Laravel query builder protects your application against SQL injection attacks.
 
-The Laravel query builder uses PDO parameter binding to protect your application against SQL injection attacks. There is no need to clean or sanitize strings passed to the query builder as query bindings.
+## Retrieving data in DB
 
 ### Retrieving All Rows From A Table
 
@@ -916,40 +936,26 @@ class UserController extends Controller
 
     return view("user.index", ["users" => $users]);
   }
-}
-```
-
-The `get` method returns an `Illuminate\Support\Collection` instance containing the results of the query where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
-
-```php
-use Illuminate\Support\Facades\DB;
-
-$users = DB::table("users")->get();
-
-foreach ($users as $user) {
-  echo $user->name;
+  /* You may access each column's value by accessing the column as a property of the object */
+  $users = DB::table("users")->get();
+  foreach ($users as $user) {
+    echo $user->name;
+  }
 }
 ```
 
 #### Retrieving A Single Row / Column From A Table
 
-If you just need to retrieve a single row from a database table, you may use the `DB` facade's `first` method. This method will return a single `stdClass` object:
+If you just need to retrieve a single row from a database table, you may use the `DB` facade's `first` method.
 
 ```php
 $user = DB::table("users") // Selecting the "users" table from the database
   ->where("name", "John") // Filtering the results to only include records with the name "John"
   ->first(); // Retrieving the first matching record
+  /* or */
+  ->value("email"); // Retrieving the value of the "email" column from the query result
 
 return $user->email; // Returning the email property of the retrieved user
-```
-
-If you don't need an entire row, you may extract a single value from a record using the `value` method. This method will return the value of the column directly:
-
-```php
-$email = DB::table("users")
-  ->where("name", "John")
-->value("email"); // Retrieving the value of the "email" column from the query result
-
 ```
 
 To retrieve a single row by its `id` column value, use the `find` method:
@@ -967,26 +973,17 @@ If you would like to retrieve an `Illuminate\Support\Collection` instance contai
 use Illuminate\Support\Facades\DB;
 
 $titles = DB::table("users")->pluck("title"); // Retrieving all values of the "title" column from the "users" table and assigning them to the variable $titles
-
+/* or */
+$titles = DB::table("users")->pluck("title", "name"); // Retrieving values from the "title" column, using the "name" column as the key
 
 foreach ($titles as $title) {
   echo $title;
 }
 ```
 
-You may specify the column that the resulting collection should use as its keys by providing a second argument to the `pluck` method:
-
-```php
-$titles = DB::table("users")->pluck("title", "name"); // Retrieving values from the "title" column, using the "name" column as the key
-
-foreach ($titles as $name => $title) {
-  echo $title;
-}
-```
-
 ### Chunking Results
 
-If you need to work with thousands of database records, consider using the `chunk` method provided by the `DB` facade. This method retrieves a small chunk of results at a time and feeds each chunk into a closure for processing. For example, let's retrieve the entire `users` table in chunks of 100 records at a time:
+let's retrieve the entire `users` table in chunks of 100 records at a time:
 
 ```php
 use Illuminate\Support\Collection;
@@ -997,36 +994,31 @@ DB::table("users") // Selecting the "users" table
   ->chunk(100, function (Collection $users) { // Retrieving the users in chunks of 100 and processing each chunk using a callback function
     foreach ($users as $user) { // Iterating over each user in the current chunk
       // ...
+      // You may stop further chunks from being processed by returning `false` from the closure:
+      return false;
     }
   });
 
 ```
 
-You may stop further chunks from being processed by returning `false` from the closure:
+If you are updating database records while chunking results, your chunk results could change in **unexpected ways**. If you plan to update the retrieved records while chunking, it is always best to use the `chunkById` method instead. This method will automatically paginate the results based on the record's primary key:
 
 ```php
-DB::table("users") // Selecting the "users" table
-  ->orderBy("id") // Sorting the results in ascending order of the "id" column
-  ->chunk(100, function (Collection $users) {
-    // Process the records...
-    
-    return false;
-  });
-
-```
-
-If you are updating database records while chunking results, your chunk results could change in unexpected ways. If you plan to update the retrieved records while chunking, it is always best to use the `chunkById` method instead. This method will automatically paginate the results based on the record's primary key:
-
-```php
+// Select the "users" table from the database
 DB::table("users")
+  // Filter the records where the "active" column is false
   ->where("active", false)
+  // Process the records in chunks of 100
   ->chunkById(100, function (Collection $users) {
+    // Loop through each user record within the chunk
     foreach ($users as $user) {
+      // Update the "active" column to true for the current user
       DB::table("users")
         ->where("id", $user->id)
         ->update(["active" => true]);
     }
   });
+
 ```
 
 > **Warning**
@@ -1073,9 +1065,12 @@ The query builder also provides a variety of methods for retrieving aggregate va
 ```php
 use Illuminate\Support\Facades\DB;
 
+// Retrieve the total count of records in the "users" table
 $users = DB::table("users")->count();
 
+// Retrieve the maximum value of the "price" column from the "orders" table
 $price = DB::table("orders")->max("price");
+
 ```
 
 Of course, you may combine these methods with other clauses to fine-tune how your aggregate value is calculated:
@@ -1091,24 +1086,29 @@ $price = DB::table("orders")
 Instead of using the `count` method to determine if any records exist that match your query's constraints, you may use the `exists` and `doesntExist` methods:
 
 ```php
+// Check if there are any records in the "orders" table where the "finalized" column is equal to 1
 if (
   DB::table("orders")
     ->where("finalized", 1)
     ->exists()
 ) {
+  // Code block to be executed if the condition is true
   // ...
 }
 
+// Check if there are no records in the "orders" table where the "finalized" column is equal to 1
 if (
   DB::table("orders")
     ->where("finalized", 1)
     ->doesntExist()
 ) {
+  // Code block to be executed if the condition is true
   // ...
 }
+
 ```
 
-## Select Statements
+## Select Statements in DB
 
 ### Specifying A Select Clause
 
@@ -1117,37 +1117,47 @@ You may not always want to select all columns from a database table. Using the `
 ```php
 use Illuminate\Support\Facades\DB;
 
+// Retrieve data from the "users" table in the database
+// Select the "name" column and rename it as "user_email" for the result set
 $users = DB::table("users")
   ->select("name", "email as user_email")
   ->get();
-```
-
-The `distinct` method allows you to force the query to return distinct results:
-
-```php
-$users = DB::table("users")
-  ->distinct()
+  /* or */
+  ->distinct() //The `distinct` method allows you to force the query to return distinct (specific) results
   ->get();
 ```
 
 If you already have a query builder instance and you wish to add a column to its existing select clause, you may use the `addSelect` method:
 
 ```php
+// Create a new query builder instance and select the "name" column from the "users" table
 $query = DB::table("users")->select("name");
 
+// Extend the existing query to also select the "age" column from the "users" table
 $users = $query->addSelect("age")->get();
+
 ```
 
-## Raw Expressions
+## Raw Expressions in DB
 
 Sometimes you may need to insert an arbitrary string into a query. To create a raw string expression, you may use the `raw` method provided by the `DB` facade:
 
 ```php
+// Retrieve a query builder instance for the "users" table
 $users = DB::table("users")
+
+  // Select the count of all rows as "user_count" and the "status" column
   ->select(DB::raw("count(*) as user_count, status"))
+
+  // Add a where clause to filter out rows with a "status" value of 1
   ->where("status", "<>", 1)
+
+  // Group the results by the "status" column
   ->groupBy("status")
+
+  // Execute the query and fetch the results into the "$users" variable
   ->get();
+
 ```
 
 > **Warning**
@@ -1162,9 +1172,16 @@ Instead of using the `DB::raw` method, you may also use the following methods to
 The `selectRaw` method can be used in place of `addSelect(DB::raw(/* ... */))`. This method accepts an optional array of bindings as its second argument:
 
 ```php
+# Assigning the result of a database query to the variable "orders"
 $orders = DB::table("orders")
-  ->selectRaw("price * ? as price_with_tax", [1.0825])
-  ->get();
+
+# Selecting a calculated column in the query using selectRaw() method
+# The calculated column is the product of "price" and a tax rate of 1.0825
+# The result is aliased as "price_with_tax" 
+->selectRaw("price * ? as price_with_tax", [1.0825])
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 #### `whereRaw / orWhereRaw`
@@ -1172,9 +1189,17 @@ $orders = DB::table("orders")
 The `whereRaw` and `orWhereRaw` methods can be used to inject a raw "where" clause into your query. These methods accept an optional array of bindings as their second argument:
 
 ```php
+# Assigning the result of a database query to the variable "orders"
 $orders = DB::table("orders")
-  ->whereRaw('price > IF(state = "TX", ?, 100)', [200])
-  ->get();
+
+# Adding a condition to the query using whereRaw() method
+# The condition is based on the value of the "state" column:
+## If the state is "TX", compare the "price" column with the provided value (200)
+## Otherwise, compare the "price" column with 100
+->whereRaw('price > IF(state = "TX", ?, 100)', [200])
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 #### `havingRaw / orHavingRaw`
@@ -1182,11 +1207,21 @@ $orders = DB::table("orders")
 The `havingRaw` and `orHavingRaw` methods may be used to provide a raw string as the value of the "having" clause. These methods accept an optional array of bindings as their second argument:
 
 ```php
+# Assigning the result of a database query to the variable "orders"
 $orders = DB::table("orders")
-  ->select("department", DB::raw("SUM(price) as total_sales"))
-  ->groupBy("department")
-  ->havingRaw("SUM(price) > ?", [2500])
-  ->get();
+
+# Selecting the "department" column and calculating the sum of prices as "total_sales"
+->select("department", DB::raw("SUM(price) as total_sales"))
+
+# Grouping the results by the "department" column
+->groupBy("department")
+
+# Adding a condition to the grouped results using the havingRaw() method
+# The condition checks if the sum of prices is greater than 2500
+->havingRaw("SUM(price) > ?", [2500])
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 #### `orderByRaw`
@@ -1194,9 +1229,14 @@ $orders = DB::table("orders")
 The `orderByRaw` method may be used to provide a raw string as the value of the "order by" clause:
 
 ```php
+# Assigning the result of a database query to the variable "orders"
 $orders = DB::table("orders")
-  ->orderByRaw("updated_at - created_at DESC")
-  ->get();
+
+# Sorting the results based on the difference between the "updated_at" and "created_at" columns in descending order
+->orderByRaw("updated_at - created_at DESC")
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 ### `groupByRaw`
@@ -1204,74 +1244,98 @@ $orders = DB::table("orders")
 The `groupByRaw` method may be used to provide a raw string as the value of the `group by` clause:
 
 ```php
+# Assigning the result of a database query to the variable "orders"
 $orders = DB::table("orders")
-  ->select("city", "state")
-  ->groupByRaw("city, state")
-  ->get();
+
+# Specifying the columns "city" and "state" to be selected from the table
+->select("city", "state")
+
+# Grouping the results based on the combination of "city" and "state" columns
+->groupByRaw("city, state")
+
+# Executing the query and retrieving the results
+->get();
 ```
 
-## Joins
+## Joins in DB
 
 ### Inner Join Clause
 
-The query builder may also be used to add join clauses to your queries. To perform a basic "inner join", you may use the `join` method on a query builder instance. The first argument passed to the `join` method is the name of the table you need to join to, while the remaining arguments specify the column constraints for the join. You may even join multiple tables in a single query:
+To perform a basic "inner join", you may use the `join` method on a query builder instance. The first argument passed to the `join` method is the name of the table you need to join to, while the remaining arguments specify the column constraints for the join. You may even join multiple tables in a single query:
 
 ```php
 use Illuminate\Support\Facades\DB;
 
+# Assigning the result of a database query to the variable "users"
 $users = DB::table("users")
-  ->join("contacts", "users.id", "=", "contacts.user_id")
-  ->join("orders", "users.id", "=", "orders.user_id")
-  ->select("users.*", "contacts.phone", "orders.price")
-  ->get();
-```
 
-#### Left Join / Right Join Clause
+# Joining the "contacts" table using the "id" column from "users" table and "user_id" column from "contacts" table
+->join("contacts", "users.id", "=", "contacts.user_id")
 
-If you would like to perform a "left join" or "right join" instead of an "inner join", use the `leftJoin` or `rightJoin` methods. These methods have the same signature as the `join` method:
+# Joining the "orders" table using the "id" column from "users" table and "user_id" column from "orders" table
+->join("orders", "users.id", "=", "orders.user_id")
 
-```php
-$users = DB::table("users")
-  ->leftJoin("posts", "users.id", "=", "posts.user_id")
-  ->get();
+# Selecting all columns from the "users" table, along with the "phone" column from the "contacts" table and the "price" column from the "orders" table
+->select("users.*", "contacts.phone", "orders.price")
 
-$users = DB::table("users")
-  ->rightJoin("posts", "users.id", "=", "posts.user_id")
-  ->get();
-```
+# leftJoin & rightJoin
 
-#### Cross Join Clause
+# Performing a left join between the "users" table and the "posts" table using the "id" column from "users" table and "user_id" column from "posts" table
+->leftJoin("posts", "users.id", "=", "posts.user_id")
 
-You may use the `crossJoin` method to perform a "cross join". Cross joins generate a cartesian product between the first table and the joined table:
+# Performing a right join between the "users" table and the "posts" table using the "id" column from "users" table and "user_id" column from "posts" table
+->rightJoin("posts", "users.id", "=", "posts.user_id")
 
-```php
-$sizes = DB::table("sizes")
-  ->crossJoin("colors")
-  ->get();
+# cartesian (dekarty) crossJoin
+
+# Performing a cross join between the "sizes" table and the "colors" table
+->crossJoin("colors")
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 #### Advanced Join Clauses
 
-You may also specify more advanced join clauses. To get started, pass a closure as the second argument to the `join` method. The closure will receive a `Illuminate\Database\Query\JoinClause` instance which allows you to specify constraints on the "join" clause:
+You may also specify more advanced join clauses. The closure will receive a `Illuminate\Database\Query\JoinClause` instance which allows you to specify constraints on the "join" clause:
 
 ```php
+# Selecting records from the "users" table and joining it with the "contacts" table
 DB::table("users")
-  ->join("contacts", function (JoinClause $join) {
-    $join->on("users.id", "=", "contacts.user_id")->orOn(/* ... */);
-  })
-  ->get();
+
+# Defining the join operation using a closure function that takes a JoinClause object as an argument
+->join("contacts", function (JoinClause $join) {
+
+  # Specifying the join condition, linking the "id" column of "users" table to the "user_id" column of the "contacts" table
+  $join->on("users.id", "=", "contacts.user_id")
+
+  # Adding an additional join condition using the "orOn" method. The specific condition is not provided here.
+  ->orOn(/* ... */);
+})
+
+# Executing the query and retrieving the results
+->get();
+
 ```
 
 If you would like to use a "where" clause on your joins, you may use the `where` and `orWhere` methods provided by the `JoinClause` instance. Instead of comparing two columns, these methods will compare the column against a value:
 
 ```php
+# Selecting records from the "users" table and joining it with the "contacts" table
 DB::table("users")
-  ->join("contacts", function (JoinClause $join) {
-    $join
-      ->on("users.id", "=", "contacts.user_id")
-      ->where("contacts.user_id", ">", 5);
-  })
-  ->get();
+
+# Defining the join operation using a closure function that takes a JoinClause object as an argument
+->join("contacts", function (JoinClause $join) {
+
+  # Specifying the join condition, linking the "id" column of "users" table to the "user_id" column of the "contacts" table
+  $join->on("users.id", "=", "contacts.user_id")
+
+  # Adding a WHERE condition to the join, filtering the records based on the "user_id" column of the "contacts" table being greater than 5
+  ->where("contacts.user_id", ">", 5);
+})
+
+# Executing the query and retrieving the results
+->get();
 ```
 
 #### Subquery Joins
@@ -1279,38 +1343,53 @@ DB::table("users")
 You may use the `joinSub`, `leftJoinSub`, and `rightJoinSub` methods to join a query to a subquery. Each of these methods receives three arguments: the subquery, its table alias, and a closure that defines the related columns. In this example, we will retrieve a collection of users where each user record also contains the `created_at` timestamp of the user's most recently published blog post:
 
 ```php
+# Selecting the latest posts with their creation date and user ID from the "posts" table
 $latestPosts = DB::table("posts")
   ->select("user_id", DB::raw("MAX(created_at) as last_post_created_at"))
+
+  # Adding a WHERE condition to filter only published posts
   ->where("is_published", true)
+
+  # Grouping the posts by user ID
   ->groupBy("user_id");
 
+# Joining the "users" table with the subquery result from $latestPosts using a closure function
 $users = DB::table("users")
   ->joinSub($latestPosts, "latest_posts", function (JoinClause $join) {
+
+    # Specifying the join condition, linking the "id" column of "users" table to the "user_id" column of the subquery result
     $join->on("users.id", "=", "latest_posts.user_id");
   })
   ->get();
 ```
 
-## Unions
+## Unions in DB
 
 The query builder also provides a convenient method to "union" two or more queries together. For example, you may create an initial query and use the `union` method to union it with more queries:
 
 ```php
 use Illuminate\Support\Facades\DB;
 
+# Selecting all rows from the "users" table where the "first_name" column is NULL
 $first = DB::table("users")->whereNull("first_name");
 
+# Selecting all rows from the "users" table where the "last_name" column is NULL
 $users = DB::table("users")
+
+  # Adding a WHERE condition to filter only rows where the "last_name" column is NULL
   ->whereNull("last_name")
+  
+  # Combining the previous query results with the $first query using UNION
   ->union($first)
+  
+  # Getting the final result set
   ->get();
+
 ```
 
-In addition to the `union` method, the query builder provides a `unionAll` method. Queries that are combined using the `unionAll` method will not have their duplicate results removed. The `unionAll` method has the same method signature as the `union` method.
+## Basic Where Clauses in DB
 
-## Basic Where Clauses
-
-### Where Clauses
+### Where Clauses (rule)
 
 You may use the query builder's `where` method to add "where" clauses to the query. The most basic call to the `where` method requires three arguments. The first argument is the name of the column. The second argument is an operator, which can be any of the database's supported operators. The third argument is the value to compare against the column's value.
 
@@ -1323,36 +1402,21 @@ $users = DB::table("users")
   ->get();
 ```
 
-For convenience, if you want to verify that a column is `=` to a given value, you may pass the value as the second argument to the `where` method. Laravel will assume you would like to use the `=` operator:
-
-```php
-$users = DB::table("users")
-  ->where("votes", 100)
-  ->get();
-```
-
-As previously mentioned, you may use any operator that is supported by your database system:
-
-```php
-$users = DB::table("users")
-  ->where("votes", ">=", 100)
-  ->get();
-
-$users = DB::table("users")
-  ->where("votes", "<>", 100)
-  ->get();
-
-$users = DB::table("users")
-  ->where("name", "like", "T%")
-  ->get();
-```
-
 You may also pass an array of conditions to the `where` function. Each element of the array should be an array containing the three arguments typically passed to the `where` method:
 
 ```php
+# Selecting all rows from the "users" table with certain conditions
 $users = DB::table("users")
-  ->where([["status", "=", "1"], ["subscribed", "<>", "1"]])
+
+  # Adding a WHERE condition to filter rows based on multiple conditions
+  ->where([
+    ["status", "=", "1"],     # Filtering rows where the "status" column is equal to 1
+    ["subscribed", "<>", "1"]  # Filtering rows where the "subscribed" column is not equal to 1
+  ])
+  
+  # Getting the final result set
   ->get();
+
 ```
 
 > **Warning**
