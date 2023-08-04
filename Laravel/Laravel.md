@@ -623,10 +623,11 @@ php artisan migrate #remember to make a database before using this code
 ```
 
 - now we can add `{{ Auth::user()->name }}` in view that we want.
-- it will be useful to add to users model `implements MustVerifyEmail` for email verification. this will force user to verify email first before using his/her account.
+- it will be useful to add to users model `implements MustVerifyEmail` in `use Illuminate\Contracts\Auth\MustVerifyEmail;` class for email verification like in users model. this will force user to verify email first before using his/her account.
 
-> Note: we can make email for our site via mailtrap.io.
-
+> selfNote 1: as i'm doing my own examples, for adding like username to users table of breeze, do `php artisan migrate:rollback` then do add username in users table and its model also in controller and migrate once again.
+> selfNote 2: we can make email for our site via mailtrap.io. after registration go to inbox settings and in SMTP sector change integration to laravel+7. then copy and paste given info in related values in `.env` file. (Don't forget thats its all in local not internet). So how to add authentication in my pages? well as default add `,'verified'` next to `'auth'` in `routes/web.php` in places that router needs to do authentication first like dashboard in my case.
+>
 ## Controllers
 
 Controllers are an alternative to Closures for defining the application logic
