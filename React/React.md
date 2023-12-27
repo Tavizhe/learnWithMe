@@ -160,6 +160,7 @@ const Greeting = () => {
 ```
 
 ```js
+//best way:
 function Greeting() {
   return (
     <div>
@@ -167,7 +168,7 @@ function Greeting() {
     </div>
   );
 }
-
+// hard way:
 const Greeting = () => {
   return React.createElement(
     'div',
@@ -177,12 +178,14 @@ const Greeting = () => {
 };
 ```
 
-### JSX Rules
+## JSX Rules
 
-- return single element (one parent element)
+- return single element in two ways (one parent element)
 
   - semantics section/article
   - Fragment - let's us group elements without adding extra nodes
+
+better way:
 
 ```js
 return <React.Fragment>...rest of the return</React.Fragment>;
@@ -192,7 +195,7 @@ return <React.Fragment>...rest of the return</React.Fragment>;
 return <>...rest of the return</>;
 ```
 
-- camelCase property naming convention
+- **camelCase** property naming convention
 
 ```js
 return (
@@ -210,13 +213,13 @@ return (
 </div>
 ```
 
-- className instead of class
+- Use **className** instead of class
 
 ```js
 return <div className='someValue'>hello</div>;
 ```
 
-- close every element
+- *close every element*
 
 ```js
 return <img />;
@@ -224,7 +227,7 @@ return <img />;
 return <input />;
 ```
 
-- formatting
+- formatting:
   - opening tag in the same line as return or ()
 
 ```js
