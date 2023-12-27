@@ -17,7 +17,7 @@ console.log(typeof text); //shows the type of returned value
 
 ---
 
-### Variables:
+### Variables
 
 with ==let== you can re-assign it as many times az you want.
 in order to using ==const== (CONSTANT) - you can't re-assign it later.
@@ -52,7 +52,7 @@ var amount = 10;
 
 ---
 
-#### combining values together:
+#### combining values together
 
 ```JavaScript
 // in order to do this we use +
@@ -60,12 +60,12 @@ const website = "youtube";
 const url = "https://www." + website + ".com";
 ```
 
-#### Quotation Marks:
+#### Quotation Marks
 
 most of times we start with " in order to use ' inside of ". later we
 use ` to have template literals.
 
-### Playing Around String Methods:
+### Playing Around String Methods
 
 ```JavaScript
 const person = 'Peter Smith';
@@ -85,7 +85,7 @@ const people = multiplyPeople(person, 10);
 
 ---
 
-### Arrays:
+### Arrays
 
 arrays are index based for knowing where we are.
 
@@ -94,7 +94,7 @@ const friends = ['john', 'peter', 'bob', 'suse', 45, undefined, null];
 const values = [firstValue, secondValue, add(5, 6)];
 ```
 
-#### Arrays Part 2:
+#### Arrays Part 2
 
 instead of using index to find what's the value of array is we can go with below example:
 
@@ -165,7 +165,7 @@ const oneBadGrades = grades.some(grade => grade === "C");
 
 ---
 
-### Functions:
+### Functions
 
 ```JavaScript
 // simple way to show func:
@@ -201,7 +201,7 @@ function calculateTotal(arr) {
 }
 ```
 
-### Functions Part 2:
+### Functions Part 2
 
 let's play around functions
 usually it's important that what we use in functions and it's depended on this keyword.
@@ -229,7 +229,7 @@ function printPerson({first, last, city}){}
 
 IIFE means Immediately Invoked Function Expression. how to do it: (Simply add () around the function)
 not only it happens immediately but it's good way at protecting the scope of your function and the variables within it.
-`(function (arguments) {codes}) (invoke); `
+`(function (arguments) {codes}) (invoke);`
 
 ```JavaScript
 (function () {
@@ -239,7 +239,7 @@ not only it happens immediately but it's good way at protecting the scope of you
 })();
 ```
 
-#### Arrow Function:
+#### Arrow Function
 
 arrow function has no name so we always assign it to a variable
 
@@ -323,7 +323,7 @@ john.balance = 10000;
 
 ---
 
-### Objects:
+### Objects
 
 objects can have methods (functions) inside them so we 're going to need dot notation to use the method inside of object.
 
@@ -347,7 +347,7 @@ delete person.siblings;// delete property
 console.log(person['random-value']); //usage of bracket notation.
 ```
 
-### Rest Operator:
+### Rest Operator
 
 gathers/collects the items
 
@@ -376,12 +376,12 @@ getAverage(person.name, 78, 90, 56, 43);
 getAverage(person.name, ...testScores);
 ```
 
-### Objects Part 2:
+### Objects Part 2
 
 we are do nesting in objects that means we can make object in another object.
 
 > if we have problem that we have same variable name in our project as in object we can use: `const{first: firstName};` to change name of our variable. or object in object : `const{first: firstName, sibling: {sister: favoriteSibling};`
-> similar way that we used Destructure array we can do it to objects too. `const {first, last, city} = bob; `
+> similar way that we used Destructure array we can do it to objects too. `const {first, last, city} = bob;`
 > Spread Operator `...objectName`
 
 ````JavaScript
@@ -483,7 +483,7 @@ console.log(bob);
 john.deposit(300);
 ```
 
-##### ES6 Classes:
+##### ES6 Classes
 
 in order to make a class, we need to declare class before naming our class, if we want to use constructor we declare it too. but we don't need declaration in method. fun fact is that ==we use property that we need in the class==. here it will not be a problem in memory or repeating.
 
@@ -506,7 +506,7 @@ john.deposit(500);
 
 ---
 
-### Conditional Statements:
+### Conditional Statements
 
 ==we are going to skip if else, Switch cases, Loops, while, do while and for.==
 unlike forEach that we can't jump out of the loop we can use break, continue to do so.
@@ -528,13 +528,13 @@ for (const letter of longName) {
 }
 ```
 
-#### Logical Operators:
+#### Logical Operators
 
 || means or, && means and.
 
 ---
 
-#### Condition operator:
+#### Condition operator
 
 ```JavaScript
 // condition ? (runs if true) : (runs if false)
@@ -543,7 +543,7 @@ value ? console.log('value is true') : console.log('value is false');
 
 ---
 
-### Implicit Type Conversion:
+### Implicit Type Conversion
 
 converting string of number to number type and the other way.
 
@@ -554,7 +554,7 @@ value = parseString(value);
 
 ---
 
-### String Properties and Methods:
+### String Properties and Methods
 
 ```JavaScript
 console.log(text.length);
@@ -576,7 +576,7 @@ console.log(text.slice(-3));
 
 ---
 
-### Template Literals:
+### Template Literals
 
 here we use backtick in order to add interpolation value in text.
 Backtick characters `` - in place of above tab (left from one on keyboard)
@@ -590,7 +590,7 @@ const value = `Hey it's ${name} and he is ${age} years old. And here is some sim
 
 ---
 
-### Array Properties and Methods:
+### Array Properties and Methods
 
 ```JavaScript
 //length
@@ -618,11 +618,11 @@ const specificNames = allNames.splice(0, 3, alice, john);
 
 ---
 
-### Powerful Array Methods:
+### Powerful Array Methods
 
 forEach, map, filter, find, reduce are the true power of using arrays.
 
-#### ForEach:
+#### ForEach
 
 ```JavaScript
 const people = [
@@ -636,7 +636,7 @@ people.forEach(function (item) {
 });
 ```
 
-#### Map:
+#### Map
 
 the usage of Map: fo adding or removing properties from array or objects.it will ==always returns a new array== and ==does not change size of original array== and uses values from original array when making new one.
 
@@ -655,7 +655,7 @@ const names = people.map(function (person) {
 document.body.innerHTML = names.join('');
 ```
 
-#### Filter:
+#### Filter
 
 filter will be used as filter a data from other kind of data with certain conditions.
 
@@ -674,7 +674,7 @@ const developers = people.filter(function (person) {
 //this command has changed all of person positions to senior developer then saved it in developers.
 ```
 
-#### Find:
+#### Find
 
 returns single instance - (in this case object) and returns first match, ==if no match undefined== and it's great for getting unique value out of a array.
 
@@ -690,7 +690,7 @@ const person = people.find(function (person) {
 });
 ```
 
-#### Reduce:
+#### Reduce
 
 we use reduce mostly with condition and counting at same time. if reduce have 2 parameters, first one is ('acc') as total of all calculations and second one parameter is ('curr') as- current iteration/value.
 
@@ -711,7 +711,7 @@ const total = people.reduce(function (acc, currItem) {
 
 ---
 
-### Math:
+### Math
 
 ```JavaScript
 const number = 4.56789;
@@ -728,7 +728,7 @@ const result = Math.floor(Math.random() * 10 + 1);
 
 ---
 
-### Date:
+### Date
 
 ```JavaScript
 const months = [
@@ -793,15 +793,15 @@ const text = [...headings]
 result.innerHTML = text;
 ```
 
-### Select the element:
+### Select the element
 
 there are many ways to do this so let's start:
 
-#### getElementsByTagName:
+#### getElementsByTagName
 
 `getElementsByTagName('tag name');`
 always ==returns HTMLCollection== that is a array-like object. in order to use it as array of text (anything) we use foreach. ==in order to convert HTMLCollection to array==:
-` const headings = document.getElementsByTagName('h2');headings[0].style.color = 'red'; const betterItems = [...headings];`
+`const headings = document.getElementsByTagName('h2');headings[0].style.color = 'red'; const betterItems = [...headings];`
 the better way to use multiple elements so we can skip converting we use `querySelectorAll(class or tag name);` it, will automatically returns NodeList (objects are collections of nodes that is array) and after we do foreach for easy changes.
 
 ```JavaScript
@@ -813,7 +813,7 @@ betterItems.forEach(function (item) {
 });
 ```
 
-#### getElementsByClassName:
+#### getElementsByClassName
 
 Again the ==returns object is HTMLCollection== that needs to be converted to array in order to make multiple changes at once.
 
@@ -823,7 +823,7 @@ listItems[2].style.color = 'blue';
 console.log(listItems);
 ```
 
-#### querySelector and querySelectorAll:
+#### querySelector and querySelectorAll
 
 we use querySelector for single select and will always returns first one that it finds and querySelectedAll for multiple selection of element as tag or class.
 got to remember hashtag ==# is for selecting ids or tags== and dot ==. is for targeting a class==.
@@ -860,7 +860,7 @@ console.log(link4?.getAttribute('href'));
 
 ---
 
-### childNodes:
+### childNodes
 
 when we are playing around array of texts or ome sort, childNodes command will returns all childNodes ==including whitespace== which is treated as a text node (array). `previousSibling` and `nextSibling` also includes whitespace.
 the better usage is to use `children, firstChild, lastChild` or for parent `.parentElement` and `previousElementSibling` and `nextElementSibling` instead, so it wont be including whitespace.
@@ -873,11 +873,11 @@ const second = (first.nextSibling.nextSibling.style.color = 'red');
 console.log(second);
 ```
 
-#### TextContext:
+#### TextContext
 
 we use textContext or nodeValue to get text inside of element.
 
-##### GetAttribute:
+##### GetAttribute
 
 `getAttribute(what we need);`will be used when we need to see the class or tag or href or any attribute of selected element, then we can use `setAttribute(to what we want);` to set change in attribute.
 
@@ -894,7 +894,7 @@ console.log(link4?.getAttribute('href'));
 
 ---
 
-### classList:
+### classList
 
 we can use classList to add multiple styles to element. (u can use it like `classList.` to see all changes possible).
 
@@ -908,7 +908,7 @@ third.classList.remove('text');
 
 ---
 
-### Element Creation in DOM:
+### Element Creation in DOM
 
 `createElement('element')` can make the element like h2 or paragraph, then `createTextNode('text content')` will inputs some text in element, then `element.appendChild(childElement)` append other element's on it, as `insertBefore('element','location');` adds it before our element and `replaceChild('new','old');` will replace the child element with new one. other stuff:
 
@@ -947,7 +947,7 @@ result.removeChild(heading);
 
 ---
 
-### Event Listeners:
+### Event Listeners
 
 event listeners are used in javaScript to wait for something like a event to happen so they active what ever function they have inside of themselves. something like this:
 `addEventListener('what event', which func)`
@@ -987,7 +987,7 @@ as we just saw in last example listener could be different like waiting for a cl
 7. keydown - when key is down
 8. keyup - when key is released
 
-### Events:
+### Events
 
 we use Events to make something happens after listeners get triggered. this so called event usually comes as `e` or `evt` or `event` and it has some sort of type each time that can be consol logged with `event.type`.
 
@@ -1029,7 +1029,7 @@ window.addEventListener('resize', function () {
 });
 ```
 
-#### currentTarget:
+#### currentTarget
 
 in the event we can use `currentTarget` to not miss spell words and to directly target the happening event.
 
@@ -1086,7 +1086,7 @@ console.log(password.value);
 
 ---
 
-### Web Storage API:
+### Web Storage API
 
 Web Storage API is provided by all browsers. there are two different storage.
 
@@ -1124,7 +1124,7 @@ console.log(values[2]);
 
 ---
 
-### setTimeout:
+### setTimeout
 
 runs function once after specific time
 
@@ -1143,7 +1143,7 @@ const firstID = setTimeout(showScore, 3000, 'john', 34);
 const secondID = setTimeout(showScore, 3000, 'peter', 88);
 ```
 
-### setInterval:
+### setInterval
 
 runs function repeatedly, at specific intervals
 
@@ -1154,7 +1154,7 @@ function showScore(name, score) {
 const firstID = setInterval(showScore, 2000, 'ted', 45);
 ```
 
-#### clearInterval:
+#### clearInterval
 
 clearInterval will clear the set interval
 
@@ -1272,7 +1272,7 @@ for (const [first, second] of result) {
 }
 ```
 
-### Set Object:
+### Set Object
 
 Set object - stores a collection of unique values of any type
 
@@ -1322,7 +1322,7 @@ const result = ['all', ...new Set(products.map((item) => item.company))];
 
 ---
 
-### String Include Method:
+### String Include Method
 
 - String includes() - checks if a string contains another string.
 
@@ -1350,7 +1350,7 @@ if (groceries.includes(randomItem, 1)) {
 }
 ```
 
-## Part 4: javaScript Modules, Async, Ajax:
+## Part 4: javaScript Modules, Async, Ajax
 
 when we are talking about a module, we are talking about separate file in folder that contains an ability that has been written in javaScript and we can use it in any of our projects.
 in code that we are doing our self we write `import {random, people} from "./utils/data.js"` the rest is in below codes:
@@ -1412,7 +1412,7 @@ export default function (selection) {
 
 ---
 
-### Synchronize:
+### Synchronize
 
 JavaScript always reads 1 line at the time. General concept means that we can manipulate time for running a code after a period of time. it make sense to first boil water and at same time we cut onion, so we use `Fetch Data, Get GeoLocation, setTimeout and setTimer` and this tactic called asynchronous. here is simple example: (it's like doing thing in background)
 
@@ -1430,7 +1430,7 @@ function boilWater(time) {
 
 this is going to make callback hell and it's not recommended.
 
-#### Promises:
+#### Promises
 
 is the way to remove callback hell. it has 3 ways:
 
