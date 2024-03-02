@@ -2,12 +2,12 @@
 
 course requirements:
 
-- HTML $ CSS
+- HTML & CSS
 - JavaScript RS6
 
 ## Start
 
-To start installing React App use following code:
+To start installing React Application, use following code:
 
 ```bash
 cd /whereUWantToInstall
@@ -53,6 +53,9 @@ settings.json
   - react auto import
     - uncheck
     - React Snippets › Settings: Import React On Top
+
+- React Developer Tools (For Google Chrome)
+To see Each component we are using together
 
 ## Folder Structure
 
@@ -249,7 +252,7 @@ function Greeting() {
 }
 ```
 
-#### Nest Components
+## Nest Components
 
 ```js
 function Greeting() {
@@ -267,15 +270,42 @@ const Message = () => {
 };
 ```
 
-#### React Developer Tools
+## Codes Till this Section
 
-- top right corner
-- more tools/extensions
-- open chrome web store
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-#### Book List
+function Greeting() {
+  {
+    /* First And Main Component */
+  }
+  return (
+    <React.Fragment>
+      <Person /> {/* Second Component */}
+      <Message /> {/* Third Component */}
+    </React.Fragment>
+  );
+}
 
-- setup structure
+const Person = () => <h2>john doe</h2>;
+{
+  /* Second Component Structure */
+}
+const Message = () => {
+  {
+    /* Third Component Structure */
+  }
+  return <p>this is my message</p>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Greeting />);
+```
+
+## Book List Example
+
+- setup structure:
 
 ```js
 import React from 'react';
@@ -312,13 +342,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(<BookList />);
 ```
-
-- in search engine type - 'amazon best selling books'
-  [Amazon Best Sellers](https://www.amazon.com/Best-Sellers-Books/zgbs/books/)
-- DON'T NEED TO BUY ANYTHING !!!
-- NOT AN AFFILIATE LINK !!!!
-- choose a book
-- copy image, title and author
 
 ```js
 import React from 'react';
@@ -361,9 +384,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<BookList />);
 ```
 
-#### CSS
+## CSS-Part of React
 
-- create index.css in src
+- create index.css in src:
 
 ```css
 * {
