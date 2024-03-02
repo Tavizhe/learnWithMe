@@ -487,7 +487,7 @@ const Image = () => (
 - whatever assets we place in public - instantly available
 - domain(localhost)/asset
 
-#### JSX - CSS (inline styles)
+### JSX - CSS (inline styles)
 
 - style prop
 - {} in JSX means going back to JS Land
@@ -519,23 +519,22 @@ const Author = () => (
 - alternative option
 
 ```js
+  /* Very Cool */
 const Author = () => {
   const inlineHeadingStyles = {
     color: '#617d98',
     fontSize: '0.75rem',
     marginTop: '0.5rem',
   };
+  /* this is possible */
   return <h4 style={inlineHeadingStyles}>Jordan Moore </h4>;
 };
 ```
 
-- FOR THE MOST PART, MULTIPLE APPROACHES AVAILABLE !!!
-- AS LONG AS THE RESULT IS THE SAME, REALLY COMES DOWN TO PREFERENCE !!!!
+## JSX - Javascript
 
-#### JSX - Javascript
-
-- refactor to single book component (personal preference)
-- remove inline css
+- Always refactor to single book component (personal preference).
+- Don't use inline css!
 
 ```js
 const Book = () => {
@@ -561,14 +560,15 @@ const Book = () => {
 }
 ```
 
-- {} in JSX means going back to JS Land
+- **{} in JSX means going back to JS Land**
 - value inside must be an expression (return value),
   can't be a statement
 
 ```js
+/* we can use this value Directly Then UpperCase it */
 const author = 'Jordan Moore';
 const Book = () => {
-  const title = 'Interesting Facts For Curious Mindssssss';
+  const title = 'Interesting Facts For Curious Minds';
   return (
     <article className='book'>
       <img
@@ -576,18 +576,15 @@ const Book = () => {
         alt='Interesting Facts For Curious Minds'
       />
       <h2>{title}</h2>
-
       <h4>{author.toUpperCase()} </h4>
-      {/* <p>{let x = 6}</p> */}
+      {/* <p>{let x = 6}</p> is wrong!*/}
       <p>{6 + 6}</p>
     </article>
   );
 };
 ```
 
-- toggle line comment Edit/Toggle Line Comment
-
-#### Props - Initial Setup
+## Props - Initial Setup
 
 - refactor/clean up
 
@@ -616,13 +613,15 @@ const Book = () => {
 ```
 
 ```js
-// parameters
+// parameters Are unNecessary!
 const someFunc = (param1, param2) => {
   console.log(param1, param2);
 };
 // arguments
 someFunc('job', 'developer');
 ```
+
+- Every Component we Create gets automatically props object (basically it is called **Parameters**), common naming convection is props.
 
 ```js
 const Book = (props) => {
